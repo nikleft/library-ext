@@ -19,8 +19,8 @@ class UserService(val userRepository: UserRepository) {
         }
     }
 
-    fun getUser(id: String): UserModel {
-        val user: Optional<UserModel> = userRepository.findById(UUID.fromString(id))
+    fun getUser(id: Int): UserModel {
+        val user: Optional<UserModel> = userRepository.findById(id)
         if (user.isPresent) return user.get() else throw UserNotFoundException()
     }
 }

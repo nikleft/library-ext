@@ -19,8 +19,8 @@ class OrderService(val orderRepository: OrderRepository) {
         }
     }
 
-    fun getOrder(id: String): OrderModel {
-        val order: Optional<OrderModel> = orderRepository.findById(UUID.fromString(id))
+    fun getOrder(id: Int): OrderModel {
+        val order: Optional<OrderModel> = orderRepository.findById(id)
         if (order.isPresent) return order.get() else throw BookNotFoundException()
     }
 }

@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Book details</title>
 </head>
 <body>
-
+    <div th:if="${book != null}">
+        <h3 th:text="${book.name}"></h3>
+        <h3 th:text="${book.author}"></h3>
+        <h3 th:text="${book.year}"></h3>
+        <h3 th:text="${book.edition}"></h3>
+        <h3 th:text="${book.image}"></h3>
+    </div>
 </body>
 </html>

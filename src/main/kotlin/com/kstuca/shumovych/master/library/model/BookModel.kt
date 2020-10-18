@@ -1,14 +1,15 @@
 package com.kstuca.shumovych.master.library.model
 
-import java.util.*
 import javax.persistence.*
 
 @Entity
 @Table(name = "books")
 data class BookModel(
+
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        val id: UUID? = null,
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "id", updatable = false, nullable = false)
+        val id: Int? = null,
         val name: String? = null,
         val author: String? = null,
         val year: String? = null,

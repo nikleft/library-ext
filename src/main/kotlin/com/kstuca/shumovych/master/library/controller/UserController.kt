@@ -14,16 +14,16 @@ class UserController(val userService: UserService) {
 
     @GetMapping
     fun getUsers(@RequestParam(value = "page", required = false) page: Int?,
-                  @RequestParam(value = "size", required = false) size: Int?,
-                  @RequestParam(value = "sort", required = false) sort: String?,
-                  model: Model): String {
-        model.addAllAttributes(userService.getUsers(1, 1, ""))
+                 @RequestParam(value = "size", required = false) size: Int?,
+                 @RequestParam(value = "sort", required = false) sort: String?,
+                 model: Model): String {
+        model.addAttribute("users", userService.getUsers(page, size, sort))
         return "users/users"
     }
 
     @GetMapping("/{id}")
-    fun getUserById(@PathVariable(value = "id") id: String, model: Model): String {
-        model.addAttribute(userService.getUser(id))
+    fun getUserById(@PathVariable(value = "id") id: Int, model: Model): String {
+        model.addAttribute("user", userService.getUser(id))
         return "users/userDetails"
     }
 }

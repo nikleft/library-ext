@@ -17,13 +17,13 @@ class BookController(val bookService: BookService) {
                  @RequestParam(value = "size", required = false) size: Int?,
                  @RequestParam(value = "sort", required = false) sort: String?,
                  model: Model): String {
-        model.addAllAttributes(bookService.getBooks(1, 1, ""))
+        model.addAttribute("books", bookService.getBooks(page, size, sort))
         return "books/allBooks"
     }
 
     @GetMapping("/{id}")
-    fun getBookById(@PathVariable(value = "id") id: String, model: Model): String {
-        model.addAttribute(bookService.getBook(id))
+    fun getBookById(@PathVariable(value = "id") id: Int, model: Model): String {
+        model.addAttribute("book", bookService.getBook(id))
         return "books/bookDetails"
     }
 }

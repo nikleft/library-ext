@@ -6,6 +6,7 @@ plugins {
 	kotlin("jvm") version "1.3.72"
 	kotlin("plugin.spring") version "1.3.72"
 	kotlin("plugin.jpa") version "1.3.72"
+	id ("io.freefair.jsass-java") version "5.2.1"
 }
 
 group = "com.kstuca.shumovych.master"

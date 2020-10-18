@@ -1,22 +1,23 @@
 package com.kstuca.shumovych.master.library.model
 
-import java.util.*
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.ManyToOne
+import javax.persistence.*
 
 @Entity
+@Table(name = "orders")
 data class OrderModel(
+
         @Id
-        val id: UUID? = null,
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "id", updatable = false, nullable = false)
+        val id: Int? = null,
         @ManyToOne
         val owner: UserModel? = null,
         @ManyToOne
         val moderator: UserModel? = null,
-        val bookId: UUID? = null,
+        val bookId: Int? = null,
         val date: String? = null,
         val tillDate: String? = null,
-        val orderId: UUID? = null,
+        val orderId: Int? = null,
         val orderState: String? = null,
         val path: String? = null
 )

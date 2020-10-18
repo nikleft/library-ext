@@ -1,9 +1,7 @@
 package com.kstuca.shumovych.master.library.domain
 
-import java.util.*
-
 data class Book(
-        val id: UUID? = null,
+        val id: Int? = null,
         val name: String? = null,
         val author: String? = null,
         val year: String? = null,

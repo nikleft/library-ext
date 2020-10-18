@@ -15,12 +15,12 @@ class BookService(val bookRepository: BookRepository) {
         return when {
             page != null && size != null && sort != null -> bookRepository.findAll(PageRequest.of(page, size, Sort.by(sort))).content
             page != null && size != null -> bookRepository.findAll(PageRequest.of(page, size)).content
-            else -> bookRepository.findAll(PageRequest.of(1, 10)).content
+            else -> bookRepository.findAll().toList()
         }
     }
 
-    fun getBook(id: String?): BookModel {
-        val book: Optional<BookModel> = bookRepository.findById(UUID.fromString(id))
+    fun getBook(id: Int): BookModel {
+        val book: Optional<BookModel> = bookRepository.findById(id)
         if (book.isPresent) return book.get() else throw BookNotFoundException()
     }
 }

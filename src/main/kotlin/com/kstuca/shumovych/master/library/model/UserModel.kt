@@ -2,14 +2,16 @@ package com.kstuca.shumovych.master.library.model
 
 import com.kstuca.shumovych.master.library.enums.UserStateEnum
 import com.kstuca.shumovych.master.library.enums.UserTypeEnum
-import java.util.*
 import javax.persistence.*
 
 @Entity
 @Table(name = "users")
 data class UserModel(
+
         @Id
-        val id: UUID? = null,
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "id", updatable = false, nullable = false)
+        val id: Int? = null,
         val name: String? = null,
         val surname: String? = null,
         val password: String? = null,

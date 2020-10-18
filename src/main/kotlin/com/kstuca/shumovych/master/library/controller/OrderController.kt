@@ -14,16 +14,16 @@ class OrderController(val orderService: OrderService) {
 
     @GetMapping
     fun getOrders(@RequestParam(value = "page", required = false) page: Int?,
-                 @RequestParam(value = "size", required = false) size: Int?,
-                 @RequestParam(value = "sort", required = false) sort: String?,
-                 model: Model): String {
-        model.addAllAttributes(orderService.getOrders(1, 1, ""))
+                  @RequestParam(value = "size", required = false) size: Int?,
+                  @RequestParam(value = "sort", required = false) sort: String?,
+                  model: Model): String {
+        model.addAttribute("orders", orderService.getOrders(page, size, sort))
         return "orders/orders"
     }
 
     @GetMapping("/{id}")
-    fun getOrderById(@PathVariable(value = "id") id: String, model: Model): String {
-        model.addAttribute(orderService.getOrder(id))
+    fun getOrderById(@PathVariable(value = "id") id: Int, model: Model): String {
+        model.addAttribute("order", orderService.getOrder(id))
         return "orders/orderDetails"
     }
 }
