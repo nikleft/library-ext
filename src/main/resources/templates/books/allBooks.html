@@ -14,75 +14,106 @@
 <body>
 <div th:insert="~{header :: user}"></div>
 <div class="container">
+    <form action="/books">
+        <div class="row">
+            <div class="genres-container col-6 col-sm-3">
+                <h1>Genres</h1>
+                <th:block th:each="genre : ${genres}">
+                    <div class="form-check">
 
-    <div class="row">
-        <div class="genres-container col-6 col-sm-3">
-            <h1>Genres</h1>
-            <th:block th:each="genre : ${genres}">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="${genre.genre.type}">
-                    <label class="form-check-label white" th:text="${genre.genre.type}"
-                           for="${genre.genre.type}"></label>
-                    <label class="pull-right white" th:text="${genre.count}"></label>
+                        <th:block th:if="${genresActive != null && !#strings.isEmpty(genresActive)}">
+                            <th:block th:if="${#lists.contains(genresActive, genre.genre.type) == true}">
+                                <input type="checkbox" th:name="genres" th:value="${genre.genre.type}"
+                                       id="${genre.genre.type}" checked>
+                            </th:block>
+                            <th:block th:unless="${#lists.contains(genresActive, genre.genre.type) == true}">
+                                <input type="checkbox" th:name="genres" th:value="${genre.genre.type}"
+                                       id="${genre.genre.type}">
+                            </th:block>
+                        </th:block>
+
+
+                        <th:block th:unless="${genresActive != null && !#strings.isEmpty(genresActive)}">
+                            <input type="checkbox" th:name="genres" th:value="${genre.genre.type}"
+                                   id="${genre.genre.type}">
+                        </th:block>
+
+                        <label class="white" th:text="${genre.genre.type}" for="${genre.genre.type}"></label>
+                        <label class="pull-right white" th:text="${genre.count}"></label>
+                    </div>
+                </th:block>
+
+
+                <h1>Year</h1>
+                <h3>From</h3>
+                <input type="number" name="from" th:value="${fromActive == null} ? '1900' : ${fromActive}" min="1900" max="2019" id="year-from">
+                <h3>To</h3>
+                <input type="number" name="to" th:value="${toActive == null} ? '1901' : ${toActive}" min="1901" max="2020" id="year-to">
+
+
+                <h1>Sort By</h1>
+                <div>
+                    <input type="radio" name="sort" value="year" id="sort-year" th:checked="${sortActive != null && sortActive == 'year'}"/>
+                    <label class="white" for="sort-year">Year</label>
                 </div>
-            </th:block>
+                <div>
+                    <input type="radio" name="sort" value="author" id="sort-author" th:checked="${sortActive != null && sortActive == 'author'}"/>
+                    <label class="white" for="sort-author">Author</label>
+                </div>
+                <div>
+                    <input type="radio" name="sort" value="edition" id="sort-edition" th:checked="${sortActive != null && sortActive == 'edition'}"/>
+                    <label class="white" for="sort-edition">Edition</label>
+                </div>
+                <div>
+                    <input type="radio" name="sort" value="name" id="sort-name" th:checked="${sortActive != null && sortActive == 'name'}"/>
+                    <label class="white" for="sort-name">Book name</label>
+                </div>
 
-            <h1>Year</h1>
-            <h3>From</h3>
-            <input type="number" min="1900" max="2019" id="year-from">
-            <h3>To</h3>
-            <input type="number" min="1901" max="2020" id="year-to">
 
-            <h1>Sort By</h1>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="sort-year">
-                <label class="form-check-label white" for="sort-year">Year</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="sort-author">
-                <label class="form-check-label white" for="sort-author">Author</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="sort-edition">
-                <label class="form-check-label white" for="sort-edition">Edition</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="sort-name">
-                <label class="form-check-label white" for="sort-name">Book name</label>
+                <div style="padding-top:1em">
+                    <button type="submit" class="button green filters-button">Apply filters</button>
+                </div>
+                <div style="padding-top:1em">
+                    <a class="button button orange filters-button" href="/books">Reset filters</a>
+                </div>
             </div>
 
-            <button class="button filters-button">Apply filters</button>
+
+            <div style="padding-left:3em" class="col-6 col-sm-9">
+                <h1>Library book list</h1>
+                <div class="book-element">
+                    <th:block th:each="book : ${books}">
+                        <div style="padding-top:2em;padding-bottom:2em" class="row">
+                            <a th:href="@{'/books/' + ${book.id}}">
+                                <img style="float:left;margin-right:2em;" src="/images/book-lister.png"/>
+                            </a>
+                            <a th:href="@{'/books/' + ${book.id}}">
+                                <h2 th:text="${book.name}"></h2>
+                            </a>
+                            <h3 th:text="${book.author}"></h3>
+                            <h3 th:text="${book.year}"></h3>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
         </div>
 
+        <div style="text-align: center" class="container">
+            <div class="pagination">
+                <th:block th:each="i: ${#numbers.sequence(1, totalPages)}">
+                    <a th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}"
+                       th:href="${urlBuilder.replaceQueryParam('page', i).toUriString()}"
+                       th:if="${activePage == i}" class="active"
+                       th:text="${i}"></a>
 
-        <div style="padding-left:3em" class="col-6 col-sm-9">
-            <h1>Library book list</h1>
-            <div class="book-element">
-                <th:block th:each="book : ${books}">
-                    <div style="padding-top:2em;padding-bottom:2em" class="row">
-                        <a th:href="@{'/books/' + ${book.id}}">
-                            <img style="float:left;margin-right:2em;" src="/images/book-lister.png"/>
-                        </a>
-                        <a th:href="@{'/books/' + ${book.id}}">
-                            <h2 th:text="${book.name}"></h2>
-                        </a>
-                        <h3 th:text="${book.author}"></h3>
-                        <h3 th:text="${book.year}"></h3>
-                    </div>
+                    <a th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}"
+                       th:href="${urlBuilder.replaceQueryParam('page', i).toUriString()}"
+                       th:unless="${activePage == i}"
+                       th:text="${i}"></a>
                 </th:block>
             </div>
         </div>
-    </div>
-
-    <div style="text-align: center" class="container">
-        <div class="pagination">
-            <th:block th:each="i: ${#numbers.sequence(0, totalPages - 1)}">
-                <a th:href="@{'/books'(page=${i})}" th:if="${activePage == i}" class="active" th:text="${i+1}"></a>
-                <a th:href="@{'/books'(page=${i})}" th:unless="${activePage == i}" th:text="${i+1}"></a>
-            </th:block>
-        </div>
-    </div>
-
+    </form>
 </div>
 </div>
 <div th:insert="~{footer :: user}"></div>

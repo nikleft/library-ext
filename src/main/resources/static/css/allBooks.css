@@ -14,8 +14,26 @@
   color: white;
 }
 
-.button {
+
+.button.green {
   background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  width: 100%;
+  height: 1.5em;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: 400;
+  font-size: 25px;
+}
+
+.button.orange {
+  background-color: #fc9803; /* Orange */
   border: none;
   color: white;
   text-align: center;

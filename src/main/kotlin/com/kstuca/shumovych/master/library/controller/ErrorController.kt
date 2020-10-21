@@ -4,6 +4,7 @@ import com.kstuca.shumovych.master.library.exception.BookNotFoundException
 import com.kstuca.shumovych.master.library.exception.ErrorResponse
 import com.kstuca.shumovych.master.library.exception.OrderNotFoundException
 import com.kstuca.shumovych.master.library.exception.UserNotFoundException
+import javax.validation.ConstraintViolationException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
@@ -25,5 +26,10 @@ class ErrorController {
     @ExceptionHandler(UserNotFoundException::class)
     fun handleUserNotFoundException(exception: UserNotFoundException): ResponseEntity<ErrorResponse> {
         return ResponseEntity(ErrorResponse(exception.error, exception.errorDescription), HttpStatus.NOT_FOUND)
+    }
+
+    @ExceptionHandler(ConstraintViolationException::class)
+    fun handleConstraintViolationException(exception: ConstraintViolationException): String {
+        return "error/400"
     }
 }
