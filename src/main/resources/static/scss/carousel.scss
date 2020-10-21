@@ -1,4 +1,4 @@
-$itemGrow: 1.2;
+$itemGrow: 1.1;
 $duration: 250ms;
 
 html {
@@ -8,12 +8,6 @@ html {
 body {
   margin: 0;
   background-color: #000;
-}
-
-h1 {
-  font-family: Arial;
-  color: red;
-  text-align: center;
 }
 
 .wrapper {
@@ -35,7 +29,7 @@ h1 {
 
       &:hover {
         margin: 0 40px;
-        transform: scale(1.2);
+        transform: scale(1.15);
       }
 
     }

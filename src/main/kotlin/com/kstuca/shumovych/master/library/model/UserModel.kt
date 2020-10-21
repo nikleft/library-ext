@@ -20,6 +20,8 @@ data class UserModel(
         val type: UserTypeEnum? = null,
         @OneToMany(cascade = [CascadeType.ALL], mappedBy = "owner")
         val orders: Set<OrderModel>? = null,
+        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "reviewer")
+        val reviews: Set<ReviewModel>? = null,
         @Enumerated(EnumType.STRING)
         val state: UserStateEnum? = null
 )

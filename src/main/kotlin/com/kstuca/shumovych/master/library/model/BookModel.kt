@@ -1,5 +1,6 @@
 package com.kstuca.shumovych.master.library.model
 
+import com.kstuca.shumovych.master.library.enums.GenreEnum
 import javax.persistence.*
 
 @Entity
@@ -14,6 +15,12 @@ data class BookModel(
         val author: String? = null,
         val year: String? = null,
         val edition: String? = null,
+        @Enumerated(EnumType.STRING)
+        val genre: GenreEnum? = null,
+        @Lob
+        val description: String? = null,
+        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "book")
+        val reviews: Set<ReviewModel>? = null,
         val count: Int? = 0,
         val path: String? = null,
         @Lob

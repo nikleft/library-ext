@@ -14,10 +14,13 @@ class BookController(val bookService: BookService) {
 
     @GetMapping
     fun getBooks(@RequestParam(value = "page", required = false) page: Int?,
-                 @RequestParam(value = "size", required = false) size: Int?,
                  @RequestParam(value = "sort", required = false) sort: String?,
                  model: Model): String {
-        model.addAttribute("books", bookService.getBooks(page, size, sort))
+        val result = bookService.getBooks(page, sort)
+        model.addAttribute("books", result.content)
+        model.addAttribute("totalPages", result.totalPages)
+        model.addAttribute("activePage", page)
+        model.addAttribute("genres", bookService.getGenresCount())
         return "books/allBooks"
     }
 

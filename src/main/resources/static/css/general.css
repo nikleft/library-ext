@@ -1,0 +1,36 @@
+h1 {
+  font-family: 'PT Sans', sans-serif;
+  color: white;
+  font-weight: 700;
+  text-align: left;
+  font-size: 50px;
+}
+
+h3 {
+  font-family: 'PT Sans', sans-serif;
+  color: white;
+  font-weight: 400;
+  font-size: 25px;
+}
+
+h2 {
+  font-family: 'PT Sans', sans-serif;
+  color: white;
+  font-weight: 700;
+  font-size: 30px;
+}
+
+h4 {
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  font-size: 17px;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+}
+
+.white {
+    color: white;
+}

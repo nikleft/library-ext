@@ -2,15 +2,85 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Book details</title>
+    <title>Index</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&family=PT+Sans&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/scss/carousel.css">
+    <link rel="stylesheet" href="/css/general.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/bookDetails.css">
 </head>
 <body>
-    <div th:if="${book != null}">
-        <h3 th:text="${book.name}"></h3>
-        <h3 th:text="${book.author}"></h3>
-        <h3 th:text="${book.year}"></h3>
-        <h3 th:text="${book.edition}"></h3>
-        <h3 th:text="${book.image}"></h3>
+<div th:insert="~{header :: user}"></div>
+<div th:if="${book != null}">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-md-4">
+                <img style="float:left;margin-right:2em;" src="/images/book-details.png"/>
+            </div>
+            <div class="col-12 col-md-8">
+                <h1><span th:text="${book.name}"></span></h1>
+                <h3><span th:text="${book.author}"></span></h3>
+                <h3>Publish date: <span th:text="${book.year}"></span></h3>
+                <h3>Edition: <span th:text="${book.edition}"></span></h3>
+                <h3><span th:text="${book.image}"></span></h3>
+                <h3 style="margin-top:2em">Description</h3>
+                <p th:text="${book.description}"></p>
+            </div>
+        </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-md-4">
+                <h1>Reviews</h1>
+            </div>
+            <div class="col-6 col-md-8">
+                <h1 class="pull-right">
+                    Overall rating: <span style="color:#33AD5E">9/10</span>
+                </h1>
+            </div>
+        </div>
+        <div style="margin-top:3em" class="row">
+            <div class="col-6 col-md-4">
+                <img style="float:left;margin-right:2em;" src="/images/profile-pic-reviews.png"/>
+            </div>
+            <div class="col-6 col-md-8 review-good">
+                <h4 class="pull-right">Date: 11-11-2011</h4>
+                <h2>Review title</h2>
+                <h4 style="margin-bottom:2em">By user123</h4>
+                <h4 th:text="${book.description}"></h4>
+                <h3>Rating: <span>10</span></h3>
+            </div>
+        </div>
+        <div style="margin-top:3em" class="row">
+            <div class="col-6 col-md-4">
+                <img style="float:left;margin-right:2em;" src="/images/profile-pic-reviews.png"/>
+            </div>
+            <div class="col-6 col-md-8 review-normal">
+                <h4 class="pull-right">Date: 11-11-2011</h4>
+                <h2>Review title</h2>
+                <h4 style="margin-bottom:2em">By user123</h4>
+                <h4 th:text="${book.description}"></h4>
+                <h3>Rating: <span>10</span></h3>
+            </div>
+        </div>
+        <div style="margin-top:3em" class="row">
+            <div class="col-6 col-md-4">
+                <img style="float:left;margin-right:2em;" src="/images/profile-pic-reviews.png"/>
+            </div>
+            <div class="col-6 col-md-8 review-bad">
+                <h4 class="pull-right">Date: 11-11-2011</h4>
+                <h2>Review title</h2>
+                <h4 style="margin-bottom:2em">By user123</h4>
+                <h4 th:text="${book.description}"></h4>
+                <h3>Rating: <span>10</span></h3>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div th:insert="~{footer :: user}"></div>
 </body>
 </html>

@@ -10,6 +10,5 @@ data class Order(
         val date: String? = null,
         val tillDate: String? = null,
         val orderId: Int? = null,
-        val orderState: String? = null,
-        val path: String? = null
+        val orderState: String? = null
 )

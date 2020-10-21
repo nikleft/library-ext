@@ -1,0 +1,11 @@
+.review-good {
+    background-color: rgba(51, 173, 94, 0.4);
+}
+
+.review-bad {
+    background-color: rgba(223, 87, 81, 0.4);
+}
+
+.review-normal {
+    background-color: rgba(217, 211, 90, 0.4);
+}

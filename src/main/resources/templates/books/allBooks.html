@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All books</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&family=PT+Sans&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="scss/carousel.css">
+    <link rel="stylesheet" href="css/allBooks.css">
+</head>
+<body>
+<div th:insert="~{header :: user}"></div>
+<div class="container">
+
+    <div class="row">
+        <div class="genres-container col-6 col-sm-3">
+            <h1>Genres</h1>
+            <th:block th:each="genre : ${genres}">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="${genre.genre.type}">
+                    <label class="form-check-label white" th:text="${genre.genre.type}"
+                           for="${genre.genre.type}"></label>
+                    <label class="pull-right white" th:text="${genre.count}"></label>
+                </div>
+            </th:block>
+
+            <h1>Year</h1>
+            <h3>From</h3>
+            <input type="number" min="1900" max="2019" id="year-from">
+            <h3>To</h3>
+            <input type="number" min="1901" max="2020" id="year-to">
+
+            <h1>Sort By</h1>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="sort-year">
+                <label class="form-check-label white" for="sort-year">Year</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="sort-author">
+                <label class="form-check-label white" for="sort-author">Author</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="sort-edition">
+                <label class="form-check-label white" for="sort-edition">Edition</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="sort-name">
+                <label class="form-check-label white" for="sort-name">Book name</label>
+            </div>
+
+            <button class="button filters-button">Apply filters</button>
+        </div>
+
+
+        <div style="padding-left:3em" class="col-6 col-sm-9">
+            <h1>Library book list</h1>
+            <div class="book-element">
+                <th:block th:each="book : ${books}">
+                    <div style="padding-top:2em;padding-bottom:2em" class="row">
+                        <a th:href="@{'/books/' + ${book.id}}">
+                            <img style="float:left;margin-right:2em;" src="/images/book-lister.png"/>
+                        </a>
+                        <a th:href="@{'/books/' + ${book.id}}">
+                            <h2 th:text="${book.name}"></h2>
+                        </a>
+                        <h3 th:text="${book.author}"></h3>
+                        <h3 th:text="${book.year}"></h3>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center" class="container">
+        <div class="pagination">
+            <th:block th:each="i: ${#numbers.sequence(0, totalPages - 1)}">
+                <a th:href="@{'/books'(page=${i})}" th:if="${activePage == i}" class="active" th:text="${i+1}"></a>
+                <a th:href="@{'/books'(page=${i})}" th:unless="${activePage == i}" th:text="${i+1}"></a>
+            </th:block>
+        </div>
+    </div>
+
+</div>
+</div>
+<div th:insert="~{footer :: user}"></div>
+</body>
+</html>
