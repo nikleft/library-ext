@@ -10,10 +10,14 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-6 col-md-4">
-                                <img class="carousel-image" src="/images/book-lister.png"/>
+                                <a th:href="@{'/books/' + ${book.id}}">
+                                    <img class="carousel-image" src="/images/book-lister.png"/>
+                                </a>
                             </div>
                             <div class="col-12 col-md-8">
-                                <h1 th:text="${book.name}"></h1>
+                                <a th:href="@{'/books/' + ${book.id}}">
+                                    <h1 th:text="${book.name}"></h1>
+                                </a>
                                 <h2 th:text="${book.author}"></h2>
                                 <div class="carousel-description">
                                     <h4 th:text="${book.description}"></h4>

@@ -33,44 +33,50 @@
     </div>
     <div class="container">
 
-        <div class="row">
-            <div class="col-6 col-md-4">
-                <h1>Reviews</h1>
-            </div>
-            <div class="col-6 col-md-8">
-                <h1 class="pull-right">
-                    Overall rating:
-                    <span th:classappend="${overallRating > 7} ? good : (${overallRating > 4} ? normal : bad)">
+        <div th:if="${book.reviews != null && !#lists.isEmpty(book.reviews)}">
+
+            <div class="row">
+                <div class="col-6 col-md-4">
+                    <h1>Reviews</h1>
+                </div>
+                <div class="col-6 col-md-8">
+                    <h1 class="pull-right">
+                        Overall rating:
+                        <span th:classappend="${overallRating > 7} ? good : (${overallRating > 4} ? normal : bad)">
                         <span th:text="${overallRating}"></span>/10
                     </span>
-                </h1>
+                    </h1>
+                </div>
             </div>
+
+            <th:block th:each="review : ${book.reviews}">
+                <div style="margin-top:3em" class="row">
+                    <div class="col-6 col-md-4">
+                        <img style="float:left;margin-right:2em;" src="/images/profile-pic-reviews.png"/>
+                    </div>
+                    <div class="col-6 col-md-8"
+                         th:classappend="${review.rating > 7} ? review-good : (${review.rating > 4} ? review-normal : review-bad)">
+                        <h4 class="pull-right">
+                            Date: <span th:text="${#dates.format(review.reviewDate, 'dd-MM-yyyy HH:mm')}"></span>
+                        </h4>
+
+                        <h2 th:text="${review.title}"></h2>
+
+                        <h4 style="margin-bottom:2em">
+                            By <span th:text="${review.reviewer.login}"></span>
+                        </h4>
+
+                        <h4 th:text="${review.description}"></h4>
+
+                        <h3>Rating: <span th:text="${review.rating}"></span></h3>
+                    </div>
+                </div>
+            </th:block>
         </div>
 
-        <th:block th:each="review : ${book.reviews}">
-
-            <div style="margin-top:3em" class="row">
-                <div class="col-6 col-md-4">
-                    <img style="float:left;margin-right:2em;" src="/images/profile-pic-reviews.png"/>
-                </div>
-                <div class="col-6 col-md-8"
-                     th:classappend="${review.rating > 7} ? review-good : (${review.rating > 4} ? review-normal : review-bad)">
-                    <h4 class="pull-right">
-                        Date: <span th:text="${#dates.format(review.reviewDate, 'dd-MM-yyyy HH:mm')}"></span>
-                    </h4>
-
-                    <h2 th:text="${review.title}"></h2>
-
-                    <h4 style="margin-bottom:2em">
-                        By <span th:text="${review.reviewer.login}"></span>
-                    </h4>
-
-                    <h4 th:text="${review.description}"></h4>
-
-                    <h3>Rating: <span th:text="${review.rating}"></span></h3>
-                </div>
-            </div>
-        </th:block>
+        <div th:unless="${book.reviews != null && !#lists.isEmpty(book.reviews) }">
+            <h1 style="text-align:center">There are no any reviews. Be first:</h1>
+        </div>
 
     </div>
 </div>

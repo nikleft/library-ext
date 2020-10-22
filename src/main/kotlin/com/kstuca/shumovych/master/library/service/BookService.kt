@@ -19,8 +19,8 @@ class BookService(val bookRepository: BookRepository) {
 
     fun getBooks(page: Int?, sort: String?): Page<BookModel> {
         return when {
-            page != null && sort != null -> bookRepository.findAll(PageRequest.of(page-1, DEFAULT_SIZE, Sort.by(sort)))
-            page != null -> bookRepository.findAll(PageRequest.of(page-1, DEFAULT_SIZE))
+            page != null && sort != null -> bookRepository.findAll(PageRequest.of(page - 1, DEFAULT_SIZE, Sort.by(sort)))
+            page != null -> bookRepository.findAll(PageRequest.of(page - 1, DEFAULT_SIZE))
             else -> bookRepository.findAll(PageRequest.of(DEFAULT_PAGE, DEFAULT_SIZE))
         }
     }
