@@ -6,7 +6,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "users")
-data class UserModel(
+class UserModel(
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +18,9 @@ data class UserModel(
         val login: String? = null,
         @Enumerated(EnumType.STRING)
         val type: UserTypeEnum? = null,
-        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "owner")
+        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "owner", fetch = FetchType.LAZY)
         val orders: Set<OrderModel>? = null,
-        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "reviewer")
+        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "reviewer", fetch = FetchType.LAZY)
         val reviews: Set<ReviewModel>? = null,
         @Enumerated(EnumType.STRING)
         val state: UserStateEnum? = null

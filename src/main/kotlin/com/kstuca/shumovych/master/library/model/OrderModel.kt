@@ -4,15 +4,14 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "orders")
-data class OrderModel(
-
+ class OrderModel(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id", updatable = false, nullable = false)
         val id: Int? = null,
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         val owner: UserModel? = null,
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         val moderator: UserModel? = null,
         val bookId: Int? = null,
         val date: String? = null,

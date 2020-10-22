@@ -1,5 +1,6 @@
 package com.kstuca.shumovych.master.library.controller
 
+import com.kstuca.shumovych.master.library.model.BookModel
 import com.kstuca.shumovych.master.library.service.BookService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -30,7 +31,9 @@ class BookController(val bookService: BookService) {
 
     @GetMapping("/{id}")
     fun getBookById(@PathVariable(value = "id") id: Int, model: Model): String {
-        model.addAttribute("book", bookService.getBook(id))
+        var book = bookService.getBook(id)
+        model.addAttribute("book", book)
+        model.addAttribute("overallRating", bookService.getOverallRating(book))
         return "books/bookDetails"
     }
 }

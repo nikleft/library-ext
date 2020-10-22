@@ -9,3 +9,15 @@
 .review-normal {
     background-color: rgba(217, 211, 90, 0.4);
 }
+
+.good {
+    color: rgba(51, 173, 94, 0.4);
+}
+
+.bad {
+    color: rgba(223, 87, 81, 0.4);
+}
+
+.normal {
+    color: rgba(217, 211, 90, 0.4);
+}

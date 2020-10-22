@@ -43,4 +43,7 @@ class BookService(val bookRepository: BookRepository) {
     }
 
     fun getGenresCount(): List<GenreCount> = bookRepository.findAllGenresWithCount()
+
+    fun getOverallRating(book: BookModel): Double =
+            book.reviews?.sumByDouble { it.rating }!!.div(book.reviews.size)
 }

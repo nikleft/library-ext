@@ -1,21 +1,28 @@
 package com.kstuca.shumovych.master.library.model
 
+import org.hibernate.validator.constraints.Range
+import java.util.*
 import javax.persistence.*
 
 @Entity
 @Table(name = "reviews")
-data class ReviewModel (
+class ReviewModel(
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id", updatable = false, nullable = false)
         val id: Int? = null,
+
+        @Column(name = "review_date")
+        val reviewDate: Date? = null,
         val title: String? = null,
         val description: String? = null,
-        val rating: Float? = null,
+        @Range(min = 0, max = 10)
+        val rating: Double,
+        @Column(name = "is_recommended")
         val isRecommended: Boolean? = null,
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         val reviewer: UserModel? = null,
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         val book: BookModel? = null
 )

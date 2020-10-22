@@ -5,7 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "books")
-data class BookModel(
+class BookModel(
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ data class BookModel(
         val genre: GenreEnum? = null,
         @Lob
         val description: String? = null,
-        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "book")
+        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "book", fetch = FetchType.LAZY)
         val reviews: Set<ReviewModel>? = null,
         val count: Int? = 0,
         val path: String? = null,
