@@ -1,265 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <title>Index</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&family=PT+Sans&display=swap"
-    rel="stylesheet">
+          rel="stylesheet">
     <link rel="stylesheet" href="scss/carousel.css">
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
 <div th:insert="~{header :: user}"></div>
-<h1 style="padding-left: 5em">Newest</h1>
-<div class="wrapper">
-    <section id="section1">
-        <a href="#section3" class="arrow__btn">‹</a>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div>
-                <h3>Roadside picnic</h3>
-                <h4>Arkady and Boris Strugatsky</h4>
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div>
-                <h3>Roadside picnic</h3>
-                <h4>Arkady and Boris Strugatsky</h4>
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div>
-                <h3>Roadside picnic</h3>
-                <h4>Arkady and Boris Strugatsky</h4>
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div>
-                <h3>Roadside picnic</h3>
-                <h4>Arkady and Boris Strugatsky</h4>
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div>
-                <h3>Roadside picnic</h3>
-                <h4>Arkady and Boris Strugatsky</h4>
-            </div>
-        </div>
-        <a href="#section2" class="arrow__btn">›</a>
-    </section>
-    <section id="section2">
-        <a href="#section1" class="arrow__btn">‹</a>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div>
-                <h3>Roadside picnic</h3>
-                <h4>Arkady and Boris Strugatsky</h4>
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div>
-                <h3>Roadside picnic</h3>
-                <h4>Arkady and Boris Strugatsky</h4>
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div>
-                <h3>Roadside picnic</h3>
-                <h4>Arkady and Boris Strugatsky</h4>
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div>
-                <h3>Roadside picnic</h3>
-                <h4>Arkady and Boris Strugatsky</h4>
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div>
-                <h3>Roadside picnic</h3>
-                <h4>Arkady and Boris Strugatsky</h4>
-            </div>
-        </div>
-        <a href="#section3" class="arrow__btn">›</a>
-    </section>
-    <section id="section3">
-        <a href="#section2" class="arrow__btn">‹</a>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div>
-                <h3>Roadside picnic</h3>
-                <h4>Arkady and Boris Strugatsky</h4>
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div>
-                <h3>Roadside picnic</h3>
-                <h4>Arkady and Boris Strugatsky</h4>
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div>
-                <h3>Roadside picnic</h3>
-                <h4>Arkady and Boris Strugatsky</h4>
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div>
-                <h3>Roadside picnic</h3>
-                <h4>Arkady and Boris Strugatsky</h4>
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div>
-                <h3>Roadside picnic</h3>
-                <h4>Arkady and Boris Strugatsky</h4>
-            </div>
-        </div>
-        <a href="#section1" class="arrow__btn">›</a>
-    </section>
+
+<div class="container">
+    <h1>Your recommendations. Enjoy</h1>
+    <div th:insert="~{index-carousel :: carousel(${recommendations}, 1)}"></div>
+    <h1>Newest</h1>
+    <div th:insert="~{index-carousel :: carousel(${recommendations}, 2)}"></div>
+    <h1>Popular</h1>
+    <div th:insert="~{index-carousel :: carousel(${recommendations}, 3)}"></div>
 </div>
 
-<h1 style="padding-left: 5em">Popular</h1>
-<div class="wrapper">
-    <section id="section1">
-        <a href="#section3" class="arrow__btn">‹</a>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div><h3>Text</h3></div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <a href="#section2" class="arrow__btn">›</a>
-    </section>
-    <section id="section2">
-        <a href="#section1" class="arrow__btn">‹</a>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div><h3>Text</h3></div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <a href="#section3" class="arrow__btn">›</a>
-    </section>
-    <section id="section3">
-        <a href="#section2" class="arrow__btn">‹</a>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div><h3>Text</h3></div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <a href="#section1" class="arrow__btn">›</a>
-    </section>
-</div>
-
-<h1 style="padding-left: 5em">Maybe you would like</h1>
-<div class="wrapper">
-    <section id="section1">
-        <a href="#section3" class="arrow__btn">‹</a>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div><h3>Text</h3></div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <a href="#section2" class="arrow__btn">›</a>
-    </section>
-    <section id="section2">
-        <a href="#section1" class="arrow__btn">‹</a>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div><h3>Text</h3></div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <a href="#section3" class="arrow__btn">›</a>
-    </section>
-    <section id="section3">
-        <a href="#section2" class="arrow__btn">‹</a>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-            <div><h3>Text</h3></div>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <div class="item">
-            <img src="images/book-lister.png"/>
-        </div>
-        <a href="#section1" class="arrow__btn">›</a>
-    </section>
-</div>
 <div th:insert="~{footer :: user}"></div>
 </body>
 </html>

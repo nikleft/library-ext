@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="carousel (recommendations, carouselId)">
+
+    <div th:id="@{'myCarousel' + ${carouselId}}" class="carousel slide carousel" data-ride="carousel">
+        <div class="carousel-inner white-back">
+            <th:block th:each="book, iter : ${recommendations}">
+                <div class="item carousel-item" th:classappend="${iter.index == 0} ? active">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6 col-md-4">
+                                <img class="carousel-image" src="/images/book-lister.png"/>
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <h1 th:text="${book.name}"></h1>
+                                <h2 th:text="${book.author}"></h2>
+                                <div class="carousel-description">
+                                    <h4 th:text="${book.description}"></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" th:href="@{'#myCarousel' + ${carouselId}}" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" th:href="@{'#myCarousel' + ${carouselId}}" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

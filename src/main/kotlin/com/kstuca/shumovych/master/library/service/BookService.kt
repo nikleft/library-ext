@@ -46,4 +46,8 @@ class BookService(val bookRepository: BookRepository) {
 
     fun getOverallRating(book: BookModel): Double =
             book.reviews?.sumByDouble { it.rating }!!.div(book.reviews.size)
+
+    fun getRecommendations(name: String?): List<BookModel> {
+        return getBooks(null, null).content
+    }
 }

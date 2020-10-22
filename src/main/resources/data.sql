@@ -8,6 +8,18 @@ insert into books (name, author, year, edition, count, genre) values ('Finding I
 insert into books (name, author, year, edition, count, genre) values ('Great Mystery Stories', 'Whodunit','1954', 'Edicions Bromera',190, 'DOCUMENTARY');
 insert into books (name, author, year, edition, count, genre) values ('Software Wizardry', 'Abugov','1960', 'J.B. Lippincott',15, 'HOBBY');
 
+insert into books (name, author, year, edition, count, genre) values ('Software Wizardry', 'Abugov','1960', 'J.B. Lippincott',15, 'HOBBY');
+insert into books (name, author, year, edition, count, genre) values ('Software Wizardry', 'Abugov','1960', 'J.B. Lippincott',15, 'HOBBY');
+insert into books (name, author, year, edition, count, genre) values ('Software Wizardry', 'Abugov','1960', 'J.B. Lippincott',15, 'HOBBY');
+insert into books (name, author, year, edition, count, genre) values ('Software Wizardry', 'Abugov','1960', 'J.B. Lippincott',15, 'HOBBY');
+insert into books (name, author, year, edition, count, genre) values ('Software Wizardry', 'Abugov','1960', 'J.B. Lippincott',15, 'HOBBY');
+insert into books (name, author, year, edition, count, genre) values ('Software Wizardry', 'Abugov','1960', 'J.B. Lippincott',15, 'HOBBY');
+insert into books (name, author, year, edition, count, genre) values ('Software Wizardry', 'Abugov','1960', 'J.B. Lippincott',15, 'HOBBY');
+insert into books (name, author, year, edition, count, genre) values ('Software Wizardry', 'Abugov','1960', 'J.B. Lippincott',15, 'HOBBY');
+insert into books (name, author, year, edition, count, genre) values ('Software Wizardry', 'Abugov','1960', 'J.B. Lippincott',15, 'HOBBY');
+insert into books (name, author, year, edition, count, genre) values ('Software Wizardry', 'Abugov','1960', 'J.B. Lippincott',15, 'HOBBY');
+insert into books (name, author, year, edition, count, genre) values ('Software Wizardry', 'Abugov','1960', 'J.B. Lippincott',15, 'HOBBY');
+insert into books (name, author, year, edition, count, genre) values ('Software Wizardry', 'Abugov','1960', 'J.B. Lippincott',15, 'HOBBY');
 
 insert into users (name, surname, login, password, type, state) values ('Иван', 'Иванов', 'Ivanov', '123', 'DEFAULT', 'NORMAL');
 insert into users (name, surname, login, password, type, state) values ('Петр', 'Петров', 'Petrov', '123', 'DEFAULT', 'NORMAL');

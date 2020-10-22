@@ -1,0 +1,27 @@
+body {
+    background-color: black;
+}
+
+.carousel-description {
+    overflow-wrap: break-word;
+    padding-right:8em;
+}
+
+.carousel-item {
+    padding-top:4em;
+    padding-bottom:4em;
+}
+
+.carousel-image {
+    float:left;
+    margin-right:10em;
+}
+
+.white-back {
+    background: rgba(192,192,192,0.1);
+}
+
+.carousel {
+    padding-top:4em;
+    padding-bottom:4em;
+}
