@@ -1,6 +1,5 @@
 package com.kstuca.shumovych.master.library.controller
 
-import com.kstuca.shumovych.master.library.model.BookModel
 import com.kstuca.shumovych.master.library.service.BookService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
-import javax.validation.Valid
 import javax.validation.constraints.Min
 
 @Controller
@@ -24,8 +22,7 @@ class BookController(val bookService: BookService) {
                  @RequestParam(value = "from", required = false) from: String?,
                  @RequestParam(value = "to", required = false) to: String?,
                  model: Model): String {
-        val result = bookService.getBooks(page, sort)
-        bookService.fulfillModel(result, page, sort, genres, from, to, model)
+        bookService.getBooks(page, sort, genres, from, to, model)
         return "books/allBooks"
     }
 

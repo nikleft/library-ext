@@ -1,6 +1,7 @@
 package com.kstuca.shumovych.master.library.model
 
 import com.kstuca.shumovych.master.library.enums.GenreEnum
+import java.util.*
 import javax.persistence.*
 
 @Entity
@@ -13,7 +14,8 @@ class BookModel(
         val id: Int? = null,
         val name: String? = null,
         val author: String? = null,
-        val year: String? = null,
+        @Temporal(TemporalType.DATE)
+        val year: Date? = null,
         val edition: String? = null,
         @Enumerated(EnumType.STRING)
         val genre: GenreEnum? = null,
