@@ -29,11 +29,27 @@ insert into users (name, surname, username, password, email, registration_date, 
            ('Сид', 'Сидоров', 'sidorov', '$2b$10$F72hCMCBXekhI7Q6T7LTlutF7r9QFemkgdHnVmGWw695lt3FA7Nh2', 'email@gmail.com', to_date('01-01-20', 'DD-MM-RR'), 'Piccadilly London W1J 7ВХ', '+44 7911 123456'),
            ('Админ', 'Админ', 'admin', '$2b$10$F72hCMCBXekhI7Q6T7LTlutF7r9QFemkgdHnVmGWw695lt3FA7Nh2', 'email@gmail.com', to_date('01-01-20', 'DD-MM-RR'), 'Piccadilly London W1J 7ВХ', '+44 7911 123456');
 
+
+insert into books_users (users_id, books_id)
+    values (1, 1),
+           (1, 2),
+           (1, 3),
+           (1, 4),
+           (1, 5);
+
 insert into users_roles (users_id, roles_id)
     values (1, 1),
            (2, 1),
            (3, 1),
            (4, 2);
+
+insert into users_friends (user_model_id, friends_id)
+    values (1, 2),
+           (2, 1),
+           (2, 3),
+           (3, 1),
+           (3, 2);
+
 insert into reviews(title, description, rating, is_recommended, reviewer_id, book_id, review_date)
     values ('My honest review', 'Description text here', 9.2, 'true', 1, 1, '2018-01-12');
 insert into reviews(title, description, rating, is_recommended, reviewer_id, book_id, review_date)

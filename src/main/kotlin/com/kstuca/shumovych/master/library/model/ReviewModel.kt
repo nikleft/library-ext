@@ -1,6 +1,7 @@
 package com.kstuca.shumovych.master.library.model
 
 import org.hibernate.validator.constraints.Range
+import java.io.Serializable
 import java.util.*
 import javax.persistence.*
 
@@ -10,8 +11,8 @@ class ReviewModel(
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "id", updatable = false, nullable = false)
-        val id: Int? = null,
+        @Column(name = "id")
+        val id: Long? = null,
 
         @Column(name = "review_date")
         val reviewDate: Date? = null,
@@ -25,4 +26,4 @@ class ReviewModel(
         val reviewer: UserModel? = null,
         @ManyToOne(fetch = FetchType.LAZY)
         val book: BookModel? = null
-)
+): Serializable

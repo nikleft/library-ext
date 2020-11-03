@@ -26,26 +26,26 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     override fun configure(httpSecurity: HttpSecurity) {
         httpSecurity.csrf()
-                .disable()
-                .authorizeRequests()
-                .antMatchers("/registration").not().fullyAuthenticated()
-                .antMatchers("/books", "/books/**").hasRole("USER")
-                .antMatchers("/profiles", "/profiles/**").hasRole("USER")
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/h2-console/**").hasRole("ADMIN")
-                .antMatchers("/", "/resources/**").permitAll().anyRequest().authenticated()
+                    .disable()
+                    .authorizeRequests()
+                    .antMatchers("/registration").not().fullyAuthenticated()
+                    .antMatchers("/books", "/books/**").hasRole("USER")
+                    .antMatchers("/profiles", "/profiles/**").hasRole("USER")
+                    .antMatchers("/admin/**").hasRole("ADMIN")
+                    .antMatchers("/h2-console/**").hasRole("ADMIN")
+                    .antMatchers("/", "/resources/**").permitAll().anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/")
-                .permitAll()
+                    .formLogin()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/", true)
+                    .permitAll()
                 .and()
-                .logout()
-                .permitAll()
-                .logoutSuccessUrl("/login")
+                    .logout()
+                    .permitAll()
+                    .logoutSuccessUrl("/login")
 
-        httpSecurity.csrf().disable();
-        httpSecurity.headers().frameOptions().disable();
+
+        httpSecurity.headers().frameOptions().disable()
     }
 
     @Autowired

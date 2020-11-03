@@ -6,6 +6,7 @@ import com.kstuca.shumovych.master.library.enums.UserTypeEnum
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
+import java.io.Serializable
 import java.util.*
 import javax.persistence.*
 
@@ -15,16 +16,14 @@ class UserModel(
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "id", updatable = false, nullable = false)
+        @Column(name = "id")
         val id: Long? = null,
         val name: String? = null,
         val surname: String? = null,
-        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "owner", fetch = FetchType.LAZY)
-        val orders: Set<OrderModel>? = null,
         @OneToMany(cascade = [CascadeType.ALL], mappedBy = "reviewer", fetch = FetchType.LAZY)
         val reviews: Set<ReviewModel>? = null,
 
-        @ManyToMany(cascade = [CascadeType.ALL])
+        @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
         val friends: Set<UserModel>? = null,
 
         @ElementCollection(fetch = FetchType.EAGER)
@@ -34,6 +33,9 @@ class UserModel(
         @Temporal(TemporalType.DATE)
         @CreatedDate
         val registrationDate: Date? = null,
+
+        @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER, mappedBy = "users")
+        val books: List<BookModel>? = null,
         val address: String? = null,
         val phone: String? = null,
         val email: String? = null,
@@ -43,7 +45,7 @@ class UserModel(
         private val username: String? = null,
         private val password: String? = null
 
-) : UserDetails {
+) : UserDetails, Serializable {
 
     companion object {
 

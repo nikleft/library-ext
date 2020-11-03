@@ -20,7 +20,7 @@ class BookService(val bookRepository: BookRepository, val filterService: FilterS
         fulfillModel(result, page, sort, genres, from, to, model!!)
     }
 
-    fun getBook(id: Int): BookModel {
+    fun getBook(id: Long): BookModel {
         val book: Optional<BookModel> = bookRepository.findById(id)
         if (book.isPresent) return book.get() else throw BookNotFoundException()
     }

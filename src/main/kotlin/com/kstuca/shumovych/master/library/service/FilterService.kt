@@ -78,9 +78,9 @@ class FilterService(@PersistenceContext val entityManager: EntityManager) {
 
     private fun executeAndWrap(currentPage: Int?, totalPages: Long, criteria: CriteriaQuery<BookModel>): CustomPage<BookModel> {
         if (currentPage != null) {
-            return CustomPage(totalPages, entityManager.createQuery(criteria).setFirstResult(currentPage.toInt()).setMaxResults(DEFAULT_SIZE).resultList)
+            return CustomPage(totalPages, entityManager.createQuery(criteria).setFirstResult((currentPage.toInt() - 1) * 2).setMaxResults(DEFAULT_SIZE).resultList)
         }
-        return CustomPage(totalPages, entityManager.createQuery(criteria).setMaxResults(DEFAULT_SIZE).resultList)
+        return CustomPage(totalPages, entityManager.createQuery(criteria).setFirstResult(0).setMaxResults(DEFAULT_SIZE).resultList)
     }
 
     private fun getTotalPages(builder: CriteriaBuilder): Long {

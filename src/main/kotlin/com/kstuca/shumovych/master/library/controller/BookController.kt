@@ -27,7 +27,7 @@ class BookController(val bookService: BookService) {
     }
 
     @GetMapping("/{id}")
-    fun getBookById(@PathVariable(value = "id") id: Int, model: Model): String {
+    fun getBookById(@PathVariable(value = "id") id: Long, model: Model): String {
         var book = bookService.getBook(id)
         model.addAttribute("book", book)
         model.addAttribute("overallRating", bookService.getOverallRating(book))

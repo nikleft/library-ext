@@ -20,20 +20,28 @@
         <div class="row">
             <div class="col-6 col-md-4">
                 <img style="float:left;margin-right:2em;padding-bottom:1em" src="/images/book-details.png"/>
-                <div style="padding-top:1em">
-                    <form th:action="@{'/books/' + ${book.id}}">
-                        <button class="button button-put green filters-button" type="submit" value="add">
-                            Add book to shelf
-                        </button>
-                    </form>
-                </div>
-                <div style="padding-top:1em">
-                    <form th:action="@{'/books/' + ${book.id}}">
-                        <button class="button button-remove orange filters-button" type="submit" value="remove">
-                            Remove book from shelf
-                        </button>
-                    </form>
-                </div>
+
+                <th:block th:with="selection=${#authentication.principal.books.?[name == '__${book.name}__']}">
+                    <th:block th:if="${selection.size() > 0}">
+                        <div style="padding-top:1em">
+                            <form th:action="@{'/books/' + ${book.id}}">
+                                <button class="button button-remove orange filters-button" type="submit"
+                                        value="remove">
+                                    Remove book from shelf
+                                </button>
+                            </form>
+                       </div>
+                    </th:block>
+                    <th:block th:if="${selection.size() == 0}">
+                        <div style="padding-top:1em">
+                            <form th:action="@{'/books/' + ${book.id}}">
+                                <button class="button button-put green filters-button" type="submit" value="add">
+                                    Add book to shelf
+                                </button>
+                            </form>
+                        </div>
+                    </th:block>
+                </th:block>
             </div>
             <div class="col-12 col-md-8">
                 <h1><span th:text="${book.name}"></span></h1>
@@ -80,7 +88,7 @@
                         <a th:href="@{'/profiles/' + ${review.reviewer.id}}">
                             <h4 style="margin-bottom:2em">
 
-                                By <span th:text="${review.reviewer.email}"></span>
+                                By <span th:text="${review.reviewer.username}"></span>, mail: <span th:text="${review.reviewer.email}"></span>
                             </h4>
                         </a>
 

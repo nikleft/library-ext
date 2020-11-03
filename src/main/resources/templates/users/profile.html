@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" >
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Index</title>
@@ -33,11 +33,21 @@
                     <div style="padding-bottom:1em" class="profile-usertitle-job">
                         Registration date: <span th:text="${user.registrationDate}"></span>
                     </div>
-                    <th:block th:if="${#authentication.getPrincipal().getUsername() != user.name}">
-                        <form action="/addFriend" style="padding-bottom:2em">
-                            <button class="button">Add to friend list</button>
-                        </form>
+
+                    <th:block th:with="selection=${#authentication.principal.friends.?[username == '__${user.username}__']}">
+                        <th:block th:if="${selection.size() > 0}">
+                            <form action="/removeFriend" style="padding-bottom:2em">
+                                <button class="button">Remove from friend list</button>
+                            </form>
+                        </th:block>
+                        <th:block th:if="${#authentication.principal.username != user.username && selection.size() == 0}">
+                            <form action="/addFriend" style="padding-bottom:2em">
+                                <button class="button">Add friend to list</button>
+                            </form>
+                        </th:block>
                     </th:block>
+
+
                 </div>
             </div>
         </div>
@@ -62,7 +72,7 @@
                                                        data-toggle="tab">Reviews</a></li>
                             <li role="presentation"><a href="#friends" aria-controls="friends" role="tab"
                                                        data-toggle="tab">Friends</a></li>
-                            <th:block th:if="${#authentication.getPrincipal().getUsername() == user.name}">
+                            <th:block th:if="${#authentication.getPrincipal().getUsername() == user.username}">
                                 <li role="presentation"><a href="#home" aria-controls="home" role="tab"
                                                            data-toggle="tab">Update profile</a></li>
                             </th:block>
@@ -82,14 +92,14 @@
                             </div>
 
                             <div role="tabpanel" class="tab-pane" id="mybooks">
-                                <th:block th:each="order : ${user.orders}">
-                                    <a th:href="@{'/books/' + ${order.book.id}}">
+                                <th:block th:each="orderbook : ${user.books}">
+                                    <a th:href="@{'/books/' + ${orderbook.id}}">
                                         <div class="row">
                                             <img style="float:left;margin-right:2em;"
                                                  src="/images/book-open.png"/>
-                                            <h2 class="black">Book name: <span th:text="${order.book.title}"></span>
+                                            <h2 class="black">Book name: <span th:text="${orderbook.name}"></span>
                                             </h2>
-                                            <h3 class="black">Author: <span th:text="${order.book.author}"></span></h3>
+                                            <h3 class="black">Author: <span th:text="${orderbook.author}"></span></h3>
                                         </div>
                                     </a>
                                 </th:block>
@@ -124,7 +134,7 @@
                                 </div>
                             </div>
 
-                            <th:block th:if="${#authentication.getPrincipal().getUsername() == user.name}">
+                            <th:block th:if="${#authentication.getPrincipal().getUsername() == user.username}">
                                 <div role="tabpanel" class="tab-pane" id="home">
                                     <form>
                                         <div class="form-group">
