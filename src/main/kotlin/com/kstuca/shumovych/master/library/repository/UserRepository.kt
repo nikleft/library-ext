@@ -5,4 +5,7 @@ import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface UserRepository : PagingAndSortingRepository<UserModel, Int>
+interface UserRepository : PagingAndSortingRepository<UserModel, Long> {
+
+    fun findByUsername(username: String): UserModel?
+}

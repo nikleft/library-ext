@@ -16,8 +16,4 @@ class MainController(val bookService: BookService) {
         return "index"
     }
 
-    @GetMapping("/login", "/auth")
-    fun login(): String {
-        return "login"
-    }
 }

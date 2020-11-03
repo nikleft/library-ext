@@ -22,8 +22,8 @@ class UserController(val userService: UserService) {
     }
 
     @GetMapping("/{id}")
-    fun getUserById(@PathVariable(value = "id") id: Int, model: Model): String {
-        model.addAttribute("user", userService.getUser(id))
+    fun getUserById(@PathVariable(value = "id") id: Long, model: Model): String {
+        model.addAttribute("user", userService.findUserById(id))
         return "users/userDetails"
     }
 }

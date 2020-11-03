@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/bookDetails.css">
+    <script src="/js/removeAddBook.js"></script>
 </head>
 <body>
 <div th:insert="~{header :: user}"></div>
@@ -18,7 +19,21 @@
     <div class="container">
         <div class="row">
             <div class="col-6 col-md-4">
-                <img style="float:left;margin-right:2em;" src="/images/book-details.png"/>
+                <img style="float:left;margin-right:2em;padding-bottom:1em" src="/images/book-details.png"/>
+                <div style="padding-top:1em">
+                    <form th:action="@{'/books/' + ${book.id}}">
+                        <button class="button button-put green filters-button" type="submit" value="add">
+                            Add book to shelf
+                        </button>
+                    </form>
+                </div>
+                <div style="padding-top:1em">
+                    <form th:action="@{'/books/' + ${book.id}}">
+                        <button class="button button-remove orange filters-button" type="submit" value="remove">
+                            Remove book from shelf
+                        </button>
+                    </form>
+                </div>
             </div>
             <div class="col-12 col-md-8">
                 <h1><span th:text="${book.name}"></span></h1>
@@ -62,9 +77,12 @@
 
                         <h2 th:text="${review.title}"></h2>
 
-                        <h4 style="margin-bottom:2em">
-                            By <span th:text="${review.reviewer.login}"></span>
-                        </h4>
+                        <a th:href="@{'/profiles/' + ${review.reviewer.id}}">
+                            <h4 style="margin-bottom:2em">
+
+                                By <span th:text="${review.reviewer.email}"></span>
+                            </h4>
+                        </a>
 
                         <h4 th:text="${review.description}"></h4>
 
@@ -74,10 +92,28 @@
             </th:block>
         </div>
 
-        <div th:unless="${book.reviews != null && !#lists.isEmpty(book.reviews) }">
-            <h1 style="text-align:center">There are no any reviews. Be first:</h1>
-        </div>
 
+        <div>
+            <h1 style="text-align:center">Write your own review:</h1>
+        </div>
+        <form action="/reviews">
+            <div class="form-group">
+                <h2>Review title</h2>
+                <input type="text" class="form-control" id="reviewTitle" placeholder="My honest review">
+            </div>
+            <div class="form-group">
+                <h2>Review text</h2>
+                <textarea class="form-control" id="reviewText" rows="5"
+                          placeholder="Write what you like/dislike most of all about this book">
+
+                </textarea>
+            </div>
+            <div class="form-group">
+                <h2>Final score</h2>
+                <input type="number" class="form-control" id="reviewTotal" min="1" max="10" step="0.1">
+            </div>
+            <button class="pull-right" type="submit"> Add review</button>
+        </form>
     </div>
 </div>
 <div th:insert="~{footer :: user}"></div>
