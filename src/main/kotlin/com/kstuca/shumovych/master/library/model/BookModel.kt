@@ -28,7 +28,7 @@ class BookModel(
         val path: String? = null,
 
         @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
-        val users: List<UserModel>? = null,
+        val users: MutableList<UserModel>? = null,
         @Lob
         val image: Array<Byte>? = null
 ): Serializable

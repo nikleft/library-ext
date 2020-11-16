@@ -37,6 +37,8 @@ class BookService(val bookRepository: BookRepository, val filterService: FilterS
         model.addAttribute("toActive", to)
     }
 
+    fun updateBook(book: BookModel) = bookRepository.save(book)
+
     fun getGenresCount(): List<GenreCount> = bookRepository.findAllGenresWithCount()
 
     fun getOverallRating(book: BookModel): Double =

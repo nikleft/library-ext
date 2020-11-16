@@ -1,6 +1,7 @@
 package com.kstuca.shumovych.master.library.controller
 
 import com.kstuca.shumovych.master.library.model.UserModel
+import com.kstuca.shumovych.master.library.service.BookService
 import com.kstuca.shumovych.master.library.service.UserService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -12,12 +13,13 @@ import javax.validation.Valid
 
 
 @Controller
-class RegistrationController(val userService: UserService) {
+class RegistrationController(val userService: UserService, val bookService: BookService) {
 
 
     @GetMapping("/registration")
     fun registration(model: Model): String {
         model.addAttribute("userForm", UserModel())
+        model.addAttribute("genres", bookService.getGenresCount())
         return "registration"
     }
 
@@ -30,6 +32,6 @@ class RegistrationController(val userService: UserService) {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует")
             return "registration"
         }
-        return "redirect:/"
+        return "redirect:/login"
     }
 }

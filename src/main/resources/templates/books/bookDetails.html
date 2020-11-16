@@ -24,20 +24,15 @@
                 <th:block th:with="selection=${#authentication.principal.books.?[name == '__${book.name}__']}">
                     <th:block th:if="${selection.size() > 0}">
                         <div style="padding-top:1em">
-                            <form th:action="@{'/books/' + ${book.id}}">
-                                <button class="button button-remove orange filters-button" type="submit"
-                                        value="remove">
-                                    Remove book from shelf
-                                </button>
+                            <form th:action="@{'/books/remove/' + ${book.id}}">
+                                <input class="button button-remove orange filters-button" type="submit" value="Remove book from shelf">
                             </form>
                        </div>
                     </th:block>
                     <th:block th:if="${selection.size() == 0}">
                         <div style="padding-top:1em">
-                            <form th:action="@{'/books/' + ${book.id}}">
-                                <button class="button button-put green filters-button" type="submit" value="add">
-                                    Add book to shelf
-                                </button>
+                            <form th:action="@{'/books/add/' + ${book.id}}">
+                                <input class="button button-put green filters-button" type="submit" value="Add book to shelf">
                             </form>
                         </div>
                     </th:block>

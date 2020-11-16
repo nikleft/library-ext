@@ -6,6 +6,9 @@ import com.kstuca.shumovych.master.library.model.UserModel
 import com.kstuca.shumovych.master.library.repository.UserRepository
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
@@ -42,6 +45,12 @@ class UserService(val userRepository: UserRepository,
         return true
     }
 
+    fun updateUser(user: UserModel): UserModel {
+        val authentication: Authentication = UsernamePasswordAuthenticationToken(user, user.password, user.authorities)
+        SecurityContextHolder.getContext().authentication = authentication
+        return userRepository.save(user)
+    }
+
     fun deleteUser(userId: Long): Boolean {
         if (userRepository.findById(userId).isPresent) {
             userRepository.deleteById(userId)
@@ -56,6 +65,9 @@ class UserService(val userRepository: UserRepository,
             return user
         else throw UserNotFoundException()
     }
+
+    fun getCurrentUser(): UserModel = SecurityContextHolder.getContext().authentication.principal as UserModel
+
 
     fun isUserExists(username: String) : Boolean = userRepository.findByUsername(username) != null
 }

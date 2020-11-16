@@ -42,3 +42,8 @@ p {
 .white {
     color: white;
 }
+
+label {
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+}

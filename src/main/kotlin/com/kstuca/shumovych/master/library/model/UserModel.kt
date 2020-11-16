@@ -1,9 +1,8 @@
 package com.kstuca.shumovych.master.library.model
 
 import com.kstuca.shumovych.master.library.enums.GenreEnum
-import com.kstuca.shumovych.master.library.enums.UserStateEnum
-import com.kstuca.shumovych.master.library.enums.UserTypeEnum
 import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import java.io.Serializable
@@ -12,6 +11,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "users")
+@EntityListeners(AuditingEntityListener::class)
 class UserModel(
 
         @Id
@@ -24,7 +24,7 @@ class UserModel(
         val reviews: Set<ReviewModel>? = null,
 
         @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
-        val friends: Set<UserModel>? = null,
+        val friends: MutableSet<UserModel>? = null,
 
         @ElementCollection(fetch = FetchType.EAGER)
         @Enumerated(EnumType.STRING)
@@ -32,10 +32,10 @@ class UserModel(
 
         @Temporal(TemporalType.DATE)
         @CreatedDate
-        val registrationDate: Date? = null,
+        var registrationDate: Date? = null,
 
         @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER, mappedBy = "users")
-        val books: List<BookModel>? = null,
+        val books: MutableList<BookModel>? = null,
         val address: String? = null,
         val phone: String? = null,
         val email: String? = null,
@@ -44,6 +44,7 @@ class UserModel(
         val roles: MutableSet<RoleModel>? = null,
         private val username: String? = null,
         private val password: String? = null
+
 
 ) : UserDetails, Serializable {
 

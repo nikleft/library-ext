@@ -36,12 +36,12 @@
 
                     <th:block th:with="selection=${#authentication.principal.friends.?[username == '__${user.username}__']}">
                         <th:block th:if="${selection.size() > 0}">
-                            <form action="/removeFriend" style="padding-bottom:2em">
+                            <form th:action="@{'/profiles/removeFriend/' + ${user.id}}" style="padding-bottom:2em">
                                 <button class="button">Remove from friend list</button>
                             </form>
                         </th:block>
                         <th:block th:if="${#authentication.principal.username != user.username && selection.size() == 0}">
-                            <form action="/addFriend" style="padding-bottom:2em">
+                            <form th:action="@{'/profiles/addFriend/' + ${user.id}}" style="padding-bottom:2em">
                                 <button class="button">Add friend to list</button>
                             </form>
                         </th:block>

@@ -21,4 +21,24 @@ class ProfileController(val userService: UserService) {
         model.addAttribute("user", user)
         return "users/profile"
     }
+
+    @GetMapping("/addFriend/{id}")
+    fun addFriendById(@PathVariable(value = "id") id: Long, model: Model): String {
+        val user = userService.findUserById(userService.getCurrentUser().id!!)
+        val friend = userService.findUserById(id)
+        user.friends?.add(friend)
+        userService.updateUser(user)
+        model.addAttribute("user", friend)
+        return "users/profile"
+    }
+
+    @GetMapping("/removeFriend/{id}")
+    fun removeFriendById(@PathVariable(value = "id") id: Long, model: Model): String {
+        val user = userService.findUserById(userService.getCurrentUser().id!!)
+        val friend = userService.findUserById(id)
+        user.friends?.remove(friend)
+        userService.updateUser(user)
+        model.addAttribute("user", friend)
+        return "users/profile"
+    }
 }

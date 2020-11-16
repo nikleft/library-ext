@@ -25,6 +25,11 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Throws(Exception::class)
     override fun configure(httpSecurity: HttpSecurity) {
+
+        val resources = arrayOf(
+                "/", "/home", "/pictureCheckCode", "/include/**",
+                "/css/**", "/icons/**", "/images/**", "/js/**", "/layer/**")
+
         httpSecurity.csrf()
                     .disable()
                     .authorizeRequests()
@@ -33,7 +38,8 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                     .antMatchers("/profiles", "/profiles/**").hasRole("USER")
                     .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/h2-console/**").hasRole("ADMIN")
-                    .antMatchers("/", "/resources/**").permitAll().anyRequest().authenticated()
+                    .antMatchers(*resources).permitAll()
+                    .antMatchers("/").permitAll().anyRequest().authenticated()
                 .and()
                     .formLogin()
                     .loginPage("/login")
