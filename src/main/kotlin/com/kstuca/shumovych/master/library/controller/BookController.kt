@@ -1,9 +1,8 @@
 package com.kstuca.shumovych.master.library.controller
 
+import com.kstuca.shumovych.master.library.model.ReviewModel
 import com.kstuca.shumovych.master.library.service.BookService
 import com.kstuca.shumovych.master.library.service.UserService
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.annotation.Validated
@@ -35,6 +34,7 @@ class BookController(val bookService: BookService, val userService: UserService)
         val book = bookService.getBook(id)
         model.addAttribute("book", book)
         model.addAttribute("overallRating", bookService.getOverallRating(book))
+        model.addAttribute("reviewForm", ReviewModel())
         return "books/bookDetails"
     }
 
@@ -45,10 +45,8 @@ class BookController(val bookService: BookService, val userService: UserService)
         book.users?.add(user)
         bookService.updateBook(book)
         user.books?.add(bookService.updateBook(book))
-        userService.updateUser(user)
-        model.addAttribute("book", book)
-        model.addAttribute("overallRating", bookService.getOverallRating(book))
-        return "/books/bookDetails"
+        userService.updateCurrentUser(user)
+        return "redirect:/books/$id"
     }
 
     @GetMapping("/remove/{id}")
@@ -58,9 +56,9 @@ class BookController(val bookService: BookService, val userService: UserService)
         book.users?.remove(user)
         bookService.updateBook(book)
         user.books?.remove(book)
-        userService.updateUser(user)
+        userService.updateCurrentUser(user)
         model.addAttribute("book", book)
         model.addAttribute("overallRating", bookService.getOverallRating(book))
-        return "/books/bookDetails"
+        return "redirect:/books/$id"
     }
 }

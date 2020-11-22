@@ -18,15 +18,24 @@
 <body>
 <div th:insert="~{header :: user}"></div>
 
-<div class="container">
-    <h1>Your recommendations. Enjoy</h1>
-    <div th:insert="~{index-carousel :: carousel(${recommendations}, 1)}"></div>
-    <h1>Newest</h1>
-    <div th:insert="~{index-carousel :: carousel(${recommendations}, 2)}"></div>
-    <h1>Popular</h1>
-    <div th:insert="~{index-carousel :: carousel(${recommendations}, 3)}"></div>
-</div>
-
+<th:block sec:authorize="hasRole('ROLE_USER')">
+    <div class="container">
+        <h1>Your recommendations. Enjoy</h1>
+        <div th:insert="~{index-carousel :: carousel(${recommendations}, 1)}"></div>
+        <h1>Newest</h1>
+        <div th:insert="~{index-carousel :: carousel(${recommendations}, 2)}"></div>
+        <h1>Popular</h1>
+        <div th:insert="~{index-carousel :: carousel(${recommendations}, 3)}"></div>
+    </div>
+</th:block>
+<th:block sec:authorize="hasRole('ROLE_ADMIN')">
+    <div class="container">
+        <h1>
+            <span th:text="@{'Successfully logined as ' + ${#authentication.principal.username} + '.'}"></span>
+        </h1>
+        <h1>Now you can maintain content by options at the top.</h1>
+    </div>
+</th:block>
 <div th:insert="~{footer :: user}"></div>
 </body>
 </html>

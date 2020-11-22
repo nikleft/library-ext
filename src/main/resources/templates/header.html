@@ -16,18 +16,20 @@
                     <ul class="nav navbar-nav navbar-right text-center">
 
                         <th:block sec:authorize="hasRole('ROLE_USER')">
-                            <li class="active"><a href="/index">Main</a></li>
-                            <li class="active"><a href="/books">All books</a></li>
+                            <li><a href="/index">Main</a></li>
+                            <li><a href="/books">All books</a></li>
                             <li><a th:href="@{'/profiles/' + ${#authentication.getPrincipal().getId()}}">My profile</a></li>
                         </th:block>
-                        <th:block sec:authorize="hasRole('EDITOR_USER')">
-                            <li class="active"><a href="/admin/books">Books</a></li>
+                        <th:block sec:authorize="hasRole('ROLE_EDITOR')">
+                            <li><a href="/admin/books">Books</a></li>
+                            <li><a href="/admin/users">Users</a></li>
                         </th:block>
-                        <th:block sec:authorize="hasRole('ADMIN_USER')">
-                            <li class="active"><a href="/admin/books">Books</a></li>
-                            <li class="active"><a href="/admin/users">Users</a></li>
+                        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                            <li><a href="/admin/books">Books</a></li>
+                            <li><a href="/admin/users">Users</a></li>
+                            <li><a href="/admin/editors">Editors</a></li>
                         </th:block>
-                        <li class="active"><a href="/logout">Logout</a></li>
+                        <li><a href="/logout">Logout</a></li>
                     </ul>
                 </div>
             </div>

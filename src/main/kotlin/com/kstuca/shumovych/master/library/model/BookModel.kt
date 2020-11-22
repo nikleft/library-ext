@@ -22,12 +22,12 @@ class BookModel(
         val genre: GenreEnum? = null,
         @Lob
         val description: String? = null,
-        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "book", fetch = FetchType.LAZY)
+        @OneToMany(cascade = [CascadeType.PERSIST,CascadeType.REMOVE], mappedBy = "book", fetch = FetchType.LAZY)
         val reviews: Set<ReviewModel>? = null,
         val count: Int? = 0,
         val path: String? = null,
 
-        @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+        @ManyToMany(cascade = [CascadeType.PERSIST,CascadeType.REMOVE], fetch = FetchType.EAGER)
         val users: MutableList<UserModel>? = null,
         @Lob
         val image: Array<Byte>? = null

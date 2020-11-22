@@ -2,69 +2,72 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Регистрация</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/css/general.css">
+    <title>Index</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&family=PT+Sans&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="css/general.css">
 </head>
 
 <body>
+<div class="bg-image"></div>
 
+<div class="container" style="width:40%">
 
-<div class="container">
-
-    <form th:action="@{/registration}" th:object="${userForm}" method="post">
-        <div class="form-group">
-            <label for="name">Your name</label>
-            <input type="text" id="name" th:field="*{name}"/>
+    <h1 style="align=center;padding-top=10em;padding-bottom=3em">Registration form</h1>
+    <form class="form-horizontal" role="form" th:action="@{/registration}" th:object="${userForm}"
+          method="post">
+        <div class="form-group" style="align=center">
+            <h3>Your name</h3>
+            <input required style="width:100%;align=center" type="text" id="name" th:field="*{name}"/>
         </div>
 
         <div class="form-group">
-            <label for="surname">Your surname</label>
-            <input type="text" id="surname" th:field="*{surname}"/>
+            <h3 style="padding-top=1em">Your surname</h3>
+            <input required style="width:100%;align=center" type="text" id="surname" th:field="*{surname}"/>
         </div>
 
         <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" th:field="*{username}"/>
+            <h3 style="padding-top=1em">Username</h3>
+            <input required style="width:100%;align=center" type="text" id="username" th:field="*{username}"/>
         </div>
 
         <div class="form-group">
-            <label for="password">Password</label>
-            <input type="text" id="password" th:field="*{password}"/>
+            <h3 style="padding-top=1em">Password</h3>
+            <input required style="width:100%;align=center" type="password" id="password"
+                   th:field="*{password}"/>
         </div>
 
-        <label>Choose your favourite genres:</label>
+        <h3 style="padding-top=1em">Choose your favourite genres:</h3>
         <th:block th:each="genre, iter : ${genres}">
-            <div class="form-check">
-                <label class="white" th:text="${genre.genre.type}"></label>
-                <input type="checkbox" name="favouriteGenres" th:value="${genre.genre}" th:field="*{favouriteGenres}">
-            </div>
+            <input class="pull-right" type="checkbox" name="favouriteGenres" th:value="${genre.genre}"
+                   th:field="*{favouriteGenres}">
+            <h3 style="text" class=" white" th:text="${genre.genre.type}"></h3>
         </th:block>
-        
-        <div class="form-group">
-            <label for="address">Address</label>
-            <input type="text" id="address" th:field="*{address}"/>
+
+        <div style="padding-top=1em" class="form-group">
+            <h3 style="padding-top=1em">Address</h3>
+            <input required style="width:100%;align=center" type="text" id="address" th:field="*{address}"/>
         </div>
 
-        <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="text" id="phone" th:field="*{phone}"/>
+        <div style="padding-top=1em" class="form-group">
+            <h3 style="padding-top=1em">Phone</h3>
+            <input required style="width:100%;align=center" type="text" id="phone" th:field="*{phone}"/>
         </div>
 
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" th:field="*{email}"/>
+        <div style="padding-top=1em" class="form-group">
+            <h3 style="padding-top=1em">Email</h3>
+            <input required style="width:100%;align=center" type="email" id="email" th:field="*{email}"/>
         </div>
 
-        <input type="submit" value="Submit"/> <input type="reset" value="Reset"/>
+        <input style="padding-top=3em" type="submit" value="Submit"/>
+        <input style="padding-bottom=3em" type="reset" value="Reset"/>
     </form>
+
 </div>
-
-
 </body>
 </html>

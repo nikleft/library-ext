@@ -17,13 +17,13 @@ class UserModel(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
-        val id: Long? = null,
-        val name: String? = null,
-        val surname: String? = null,
-        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "reviewer", fetch = FetchType.LAZY)
+        var id: Long? = null,
+        var name: String? = null,
+        var surname: String? = null,
+        @OneToMany(cascade = [CascadeType.PERSIST,CascadeType.REMOVE], mappedBy = "reviewer", fetch = FetchType.EAGER)
         val reviews: Set<ReviewModel>? = null,
 
-        @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+        @ManyToMany(cascade = [CascadeType.PERSIST,CascadeType.REMOVE], fetch = FetchType.EAGER)
         val friends: MutableSet<UserModel>? = null,
 
         @ElementCollection(fetch = FetchType.EAGER)
@@ -34,11 +34,11 @@ class UserModel(
         @CreatedDate
         var registrationDate: Date? = null,
 
-        @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER, mappedBy = "users")
+        @ManyToMany(cascade = [CascadeType.PERSIST,CascadeType.REMOVE], fetch = FetchType.EAGER, mappedBy = "users")
         val books: MutableList<BookModel>? = null,
-        val address: String? = null,
-        val phone: String? = null,
-        val email: String? = null,
+        var address: String? = null,
+        var phone: String? = null,
+        var email: String? = null,
 
         @ManyToMany(fetch = FetchType.EAGER)
         val roles: MutableSet<RoleModel>? = null,
@@ -57,6 +57,7 @@ class UserModel(
                         favouriteGenres = user.favouriteGenres,
                         address = user.address,
                         phone = user.phone,
+                        email = user.email,
                         roles = roles,
                         username = user.username,
                         password = password

@@ -15,6 +15,8 @@ private const val DEFAULT_PAGE = 0
 @Service
 class BookService(val bookRepository: BookRepository, val filterService: FilterService) {
 
+    fun getAllBooks(): MutableIterable<BookModel> = bookRepository.findAll()
+
     fun getBooks(page: Int?, sort: String?, genres: List<String>?, from: String?, to: String?, model: Model?) {
         val result = filterService.applyBookFilters(page, sort, genres, from, to)
         fulfillModel(result, page, sort, genres, from, to, model!!)
@@ -39,10 +41,12 @@ class BookService(val bookRepository: BookRepository, val filterService: FilterS
 
     fun updateBook(book: BookModel) = bookRepository.save(book)
 
+    fun deleteBook(id: Long) = bookRepository.deleteById(id)
+
     fun getGenresCount(): List<GenreCount> = bookRepository.findAllGenresWithCount()
 
     fun getOverallRating(book: BookModel): Double =
-            book.reviews?.sumByDouble { it.rating }!!.div(book.reviews.size)
+            book.reviews?.sumByDouble { it.rating!! }!!.div(book.reviews.size)
 
     fun getRecommendations(name: String?): List<BookModel> {
         return bookRepository.findAll(PageRequest.of(DEFAULT_PAGE, DEFAULT_SIZE)).content

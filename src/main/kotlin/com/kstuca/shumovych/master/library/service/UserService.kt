@@ -35,7 +35,7 @@ class UserService(val userRepository: UserRepository,
 
     fun allUsers(): MutableIterable<UserModel> = userRepository.findAll()
 
-    fun saveUser(user: UserModel): Boolean {
+    fun registerUser(user: UserModel): Boolean {
         if (isUserExists(user.username!!)) return false
 
         val updatedUser = UserModel.from(user,
@@ -45,11 +45,30 @@ class UserService(val userRepository: UserRepository,
         return true
     }
 
-    fun updateUser(user: UserModel): UserModel {
+    fun updateCurrentUser(user: UserModel): UserModel {
         val authentication: Authentication = UsernamePasswordAuthenticationToken(user, user.password, user.authorities)
         SecurityContextHolder.getContext().authentication = authentication
         return userRepository.save(user)
     }
+
+    fun updateUser(oldUser: UserModel, newUser: UserModel): UserModel = UserModel(
+            id = oldUser.id,
+            name = newUser.name ?: oldUser.name,
+            favouriteGenres = newUser.favouriteGenres ?: oldUser.favouriteGenres,
+            email = newUser.email ?: oldUser.email,
+            address = newUser.address ?: oldUser.address,
+            phone = newUser.phone ?: oldUser.phone,
+            surname = newUser.surname ?: oldUser.surname,
+
+            username = oldUser.username,
+            password = oldUser.password,
+            books = oldUser.books,
+            reviews = oldUser.reviews,
+            friends = oldUser.friends,
+            registrationDate = oldUser.registrationDate,
+            roles = oldUser.roles
+    )
+
 
     fun deleteUser(userId: Long): Boolean {
         if (userRepository.findById(userId).isPresent) {
@@ -60,7 +79,7 @@ class UserService(val userRepository: UserRepository,
     }
 
     override fun loadUserByUsername(username: String): UserModel {
-        val user =  userRepository.findByUsername(username)
+        val user = userRepository.findByUsername(username)
         if (user != null)
             return user
         else throw UserNotFoundException()
@@ -69,5 +88,5 @@ class UserService(val userRepository: UserRepository,
     fun getCurrentUser(): UserModel = SecurityContextHolder.getContext().authentication.principal as UserModel
 
 
-    fun isUserExists(username: String) : Boolean = userRepository.findByUsername(username) != null
+    fun isUserExists(username: String): Boolean = userRepository.findByUsername(username) != null
 }

@@ -25,14 +25,16 @@
                     <th:block th:if="${selection.size() > 0}">
                         <div style="padding-top:1em">
                             <form th:action="@{'/books/remove/' + ${book.id}}">
-                                <input class="button button-remove orange filters-button" type="submit" value="Remove book from shelf">
+                                <input class="button button-remove orange filters-button" type="submit"
+                                       value="Remove book from shelf">
                             </form>
-                       </div>
+                        </div>
                     </th:block>
                     <th:block th:if="${selection.size() == 0}">
                         <div style="padding-top:1em">
                             <form th:action="@{'/books/add/' + ${book.id}}">
-                                <input class="button button-put green filters-button" type="submit" value="Add book to shelf">
+                                <input class="button button-put green filters-button" type="submit"
+                                       value="Add book to shelf">
                             </form>
                         </div>
                     </th:block>
@@ -83,7 +85,8 @@
                         <a th:href="@{'/profiles/' + ${review.reviewer.id}}">
                             <h4 style="margin-bottom:2em">
 
-                                By <span th:text="${review.reviewer.username}"></span>, mail: <span th:text="${review.reviewer.email}"></span>
+                                By <span th:text="${review.reviewer.username}"></span>, mail: <span
+                                    th:text="${review.reviewer.email}"></span>
                             </h4>
                         </a>
 
@@ -96,27 +99,43 @@
         </div>
 
 
-        <div>
-            <h1 style="text-align:center">Write your own review:</h1>
-        </div>
-        <form action="/reviews">
-            <div class="form-group">
-                <h2>Review title</h2>
-                <input type="text" class="form-control" id="reviewTitle" placeholder="My honest review">
-            </div>
-            <div class="form-group">
-                <h2>Review text</h2>
-                <textarea class="form-control" id="reviewText" rows="5"
-                          placeholder="Write what you like/dislike most of all about this book">
+        <th:block th:with="selection=${book.reviews.?[reviewer.email == '__${#authentication.principal.email}__']}">
+            <th:block th:if="${selection.size() == 0}">
+                <div>
+                    <h1 style="text-align:center">Write your own review:</h1>
+                </div>
+                <form th:action="@{'/reviews?book=' + ${book.id} + '&reviewer=' + ${#authentication.principal.id}}"
+                      th:object="${reviewForm}" method="post">
+                    <div class="form-group">
+                        <h2>Review title</h2>
+                        <input required type="text" id="reviewTitle" th:field="*{title}"/>
+                    </div>
 
+                    <div class="form-group">
+                        <h2>Review text</h2>
+                        <textarea required class="form-control"
+                                  id="reviewText"
+                                  rows="5"
+                                  th:field="*{description}"
+                                  placeholder="Write what you like/dislike most of all about this book">
                 </textarea>
-            </div>
-            <div class="form-group">
-                <h2>Final score</h2>
-                <input type="number" class="form-control" id="reviewTotal" min="1" max="10" step="0.1">
-            </div>
-            <button class="pull-right" type="submit"> Add review</button>
-        </form>
+                    </div>
+
+                    <div class="form-group">
+                        <h2>Final score</h2>
+                        <input required type="text" id="reviewTotal" th:field="*{rating}"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h2>Do you recommend this books to other users?</h2>
+                        <input type="checkbox" id="recommend" th:field="*{recommend}"/>
+                    </div>
+                    <input type="submit" value="Submit"/> <input type="reset" value="Reset"/>
+                </form>
+            </th:block>
+        </th:block>
+
+
     </div>
 </div>
 <div th:insert="~{footer :: user}"></div>

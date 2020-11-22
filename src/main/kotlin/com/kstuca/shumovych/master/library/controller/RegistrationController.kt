@@ -28,7 +28,7 @@ class RegistrationController(val userService: UserService, val bookService: Book
         if (bindingResult.hasErrors()) {
             return "registration"
         }
-        if (!userService.saveUser(userForm)) {
+        if (!userService.registerUser(userForm)) {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует")
             return "registration"
         }

@@ -98,6 +98,8 @@
             </div>
         </div>
 
+        <div th:if="${books != null && !#lists.isEmpty(books)}">
+
         <div style="text-align: center" class="container">
             <div class="pagination">
                 <th:block th:each="i: ${#numbers.sequence(1, totalPages)}">
@@ -112,6 +114,10 @@
                        th:text="${i}"></a>
                 </th:block>
             </div>
+        </div>
+        </div>
+        <div th:unless="${books != null && !#lists.isEmpty(books)}">
+            <h2>There are no such books in library</h2>
         </div>
     </form>
 </div>
