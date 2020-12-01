@@ -31,7 +31,7 @@ class ProfileController(val userService: UserService,
                       model: Model): String {
         val authenticated = (SecurityContextHolder.getContext().authentication.principal as UserModel)
 
-        userService.updateCurrentUser(userService.updateUser(authenticated, changeProfileForm))
+        userService.updateCurrentUser(userService.changeUser(authenticated, changeProfileForm))
 
         val user = userService.findUserById(id)
         model.addAttribute("user", user)

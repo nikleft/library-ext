@@ -138,44 +138,42 @@
                                 <div role="tabpanel" class="tab-pane" id="home">
                                     <form th:action="@{'/profiles/' + ${#authentication.principal.id}}"
                                           th:object="${changeProfileForm}" method="post">
-                                        <form>
-                                            <div class="form-group">
-                                                <h3 style="color:black" for="inputName">Name</h3>
-                                                <input required type="text" class="form-control" id="inputName"
-                                                       th:value="${changeProfileForm.name}" th:field="*{name}">
+                                        <div class="form-group">
+                                            <h3 style="color:black" for="inputName">Name</h3>
+                                            <input required type="text" class="form-control" id="inputName"
+                                                   th:value="${changeProfileForm.name}" th:field="*{name}">
+                                        </div>
+                                        <div class="form-group">
+                                            <h3 style="color:black" for="inputLastName">Last Name</h3>
+                                            <input required type="text" class="form-control" id="inputLastName"
+                                                   th:value="${changeProfileForm.surname}" th:field="*{surname}">
+                                        </div>
+                                        <div class="form-group">
+                                            <h3 style="color:black" for="exampleInputEmail1">Email address</h3>
+                                            <input required type="email" class="form-control"
+                                                   id="exampleInputEmail1"
+                                                   th:value="${changeProfileForm.email}" th:field="*{email}">
+                                        </div>
+                                        <div class="form-group">
+                                            <h3 style="color:black" for="exampleInputAddress1">Address</h3>
+                                            <input required type="text" class="form-control"
+                                                   id="exampleInputAddress1"
+                                                   th:value="${changeProfileForm.address}" th:field="*{address}">
+                                        </div>
+                                        <div class="form-group">
+                                            <h3 style="color:black" for="exampleInputPhone1">Phone</h3>
+                                            <input required type="text" class="form-control" id="exampleInputPhone1"
+                                                   th:value="${changeProfileForm.phone}" th:field="*{phone}">
+                                        </div>
+                                        <h3 style="color:black">Choose your favourite genres:</h3>
+                                        <th:block th:each="genre, iter : ${genres}">
+                                            <div class="form-check">
+                                                <label style="color:black" th:text="${genre.genre.type}"></label>
+                                                <input type="checkbox" name="favouriteGenres"
+                                                       th:value="${genre.genre}" th:field="*{favouriteGenres}">
                                             </div>
-                                            <div class="form-group">
-                                                <h3 style="color:black" for="inputLastName">Last Name</h3>
-                                                <input required type="text" class="form-control" id="inputLastName"
-                                                       th:value="${changeProfileForm.surname}" th:field="*{surname}">
-                                            </div>
-                                            <div class="form-group">
-                                                <h3 style="color:black" for="exampleInputEmail1">Email address</h3>
-                                                <input required type="email" class="form-control"
-                                                       id="exampleInputEmail1"
-                                                       th:value="${changeProfileForm.email}" th:field="*{email}">
-                                            </div>
-                                            <div class="form-group">
-                                                <h3 style="color:black" for="exampleInputAddress1">Address</h3>
-                                                <input required type="text" class="form-control"
-                                                       id="exampleInputAddress1"
-                                                       th:value="${changeProfileForm.address}" th:field="*{address}">
-                                            </div>
-                                            <div class="form-group">
-                                                <h3 style="color:black" for="exampleInputPhone1">Phone</h3>
-                                                <input required type="text" class="form-control" id="exampleInputPhone1"
-                                                       th:value="${changeProfileForm.phone}" th:field="*{phone}">
-                                            </div>
-                                            <h3 style="color:black">Choose your favourite genres:</h3>
-                                            <th:block th:each="genre, iter : ${genres}">
-                                                <div class="form-check">
-                                                    <label style="color:black" th:text="${genre.genre.type}"></label>
-                                                    <input type="checkbox" name="favouriteGenres"
-                                                           th:value="${genre.genre}" th:field="*{favouriteGenres}">
-                                                </div>
-                                            </th:block>
-                                            <button type="submit" class="btn btn-default">Submit</button>
-                                        </form>
+                                        </th:block>
+                                        <button type="submit" class="btn btn-default">Submit</button>
                                     </form>
                                 </div>
                             </th:block>

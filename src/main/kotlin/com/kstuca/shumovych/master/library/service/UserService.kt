@@ -35,11 +35,11 @@ class UserService(val userRepository: UserRepository,
 
     fun allUsers(): MutableIterable<UserModel> = userRepository.findAll()
 
-    fun registerUser(user: UserModel): Boolean {
-        if (isUserExists(user.username!!)) return false
+    fun registerUser(user: UserModel, role: RoleModel): Boolean {
+        if (user.username != null && isUserExists(user.username!!)) return false
 
         val updatedUser = UserModel.from(user,
-                mutableSetOf(RoleModel(1L, "ROLE_USER")),
+                mutableSetOf(role),
                 bCryptPasswordEncoder.encode(user.password))
         userRepository.save(updatedUser)
         return true
@@ -51,7 +51,7 @@ class UserService(val userRepository: UserRepository,
         return userRepository.save(user)
     }
 
-    fun updateUser(oldUser: UserModel, newUser: UserModel): UserModel = UserModel(
+    fun changeUser(oldUser: UserModel, newUser: UserModel): UserModel = UserModel(
             id = oldUser.id,
             name = newUser.name ?: oldUser.name,
             favouriteGenres = newUser.favouriteGenres ?: oldUser.favouriteGenres,
@@ -60,8 +60,8 @@ class UserService(val userRepository: UserRepository,
             phone = newUser.phone ?: oldUser.phone,
             surname = newUser.surname ?: oldUser.surname,
 
-            username = oldUser.username,
-            password = oldUser.password,
+            username = newUser.username ?: oldUser.username,
+            password = if(newUser.password != null) bCryptPasswordEncoder.encode(newUser.password) else oldUser.password,
             books = oldUser.books,
             reviews = oldUser.reviews,
             friends = oldUser.friends,
@@ -69,6 +69,9 @@ class UserService(val userRepository: UserRepository,
             roles = oldUser.roles
     )
 
+    fun updateUser(oldUser: UserModel, newUser: UserModel): UserModel {
+       return userRepository.save(changeUser(oldUser, newUser))
+    }
 
     fun deleteUser(userId: Long): Boolean {
         if (userRepository.findById(userId).isPresent) {

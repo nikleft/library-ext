@@ -2,6 +2,7 @@ package com.kstuca.shumovych.master.library.controller
 
 import com.kstuca.shumovych.master.library.model.UserModel
 import com.kstuca.shumovych.master.library.service.BookService
+import com.kstuca.shumovych.master.library.service.RoleService
 import com.kstuca.shumovych.master.library.service.UserService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -13,7 +14,9 @@ import javax.validation.Valid
 
 
 @Controller
-class RegistrationController(val userService: UserService, val bookService: BookService) {
+class RegistrationController(val userService: UserService,
+                             val bookService: BookService,
+                             val roleService: RoleService) {
 
 
     @GetMapping("/registration")
@@ -28,7 +31,7 @@ class RegistrationController(val userService: UserService, val bookService: Book
         if (bindingResult.hasErrors()) {
             return "registration"
         }
-        if (!userService.registerUser(userForm)) {
+        if (!userService.registerUser(userForm, roleService.getRoleById(1).get())) {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует")
             return "registration"
         }

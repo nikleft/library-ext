@@ -41,7 +41,20 @@ class BookService(val bookRepository: BookRepository, val filterService: FilterS
 
     fun updateBook(book: BookModel) = bookRepository.save(book)
 
+    fun changeBook(id: Long, book: BookModel) {
+        val old = bookRepository.findById(id).get()
+        book.name.let { old.name = book.name}
+        book.author.let { old.author = book.author}
+        book.edition.let { old.edition = book.edition}
+        book.year.let { old.year = book.year}
+        book.description.let { old.description = book.description}
+        book.genre.let { old.genre = book.genre}
+        bookRepository.save(old)
+    }
+
     fun deleteBook(id: Long) = bookRepository.deleteById(id)
+
+    fun saveBook(book: BookModel) = bookRepository.save(book)
 
     fun getGenresCount(): List<GenreCount> = bookRepository.findAllGenresWithCount()
 

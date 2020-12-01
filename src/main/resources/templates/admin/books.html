@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Index</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&family=PT+Sans&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<div th:insert="~{header :: user}"></div>
+
+<div class="container" style="padding-bottom:3em">
+    <h1>Books</h1>
+    <a th:href="@{'/admin/books/create'}">Create book</a>
+
+    <th:block th:each="book : ${books}">
+        <div class="row" style="padding-top:1em">
+            <div class="col-md-3">
+            <h5>Book id: <span th:text="${book.id}"></span></h5>
+            </div>
+            <div class="col-md-3">
+                <h5>Book name: <span th:text="${book.name}"></span></h5>
+            </div>
+            <div class="col-md-3">
+                <h5>Author: <span th:text="${book.author}"></span></h5>
+            </div>
+            <div class="col-md-3 pull-right">
+                <a th:href="@{'/admin/books/update/' + ${book.id}}">Update book</a>
+                <form id="login-form" class="form pull-right" method="POST" th:action="@{'/admin/books/delete/' + ${book.id}}">
+                    <button type="submit">Remove book</button>
+                </form>
+            </div>
+        </div>
+    </th:block>
+</div>
+
+<div th:insert="~{footer :: user}"></div>
+</body>
+</html>

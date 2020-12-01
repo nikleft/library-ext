@@ -1,6 +1,9 @@
 package com.kstuca.shumovych.master.library.model
 
 import com.kstuca.shumovych.master.library.enums.GenreEnum
+import org.hibernate.engine.spi.CascadeStyles.LOCK
+import org.hibernate.engine.spi.CascadingActions.LOCK
+import org.hibernate.event.spi.EventType.LOCK
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import org.springframework.security.core.GrantedAuthority
@@ -20,10 +23,10 @@ class UserModel(
         var id: Long? = null,
         var name: String? = null,
         var surname: String? = null,
-        @OneToMany(cascade = [CascadeType.PERSIST,CascadeType.REMOVE], mappedBy = "reviewer", fetch = FetchType.EAGER)
+        @OneToMany(cascade = [CascadeType.PERSIST, CascadeType.REMOVE], mappedBy = "reviewer", fetch = FetchType.EAGER)
         val reviews: Set<ReviewModel>? = null,
 
-        @ManyToMany(cascade = [CascadeType.PERSIST,CascadeType.REMOVE], fetch = FetchType.EAGER)
+        @ManyToMany(cascade = [CascadeType.PERSIST, CascadeType.REMOVE], fetch = FetchType.EAGER)
         val friends: MutableSet<UserModel>? = null,
 
         @ElementCollection(fetch = FetchType.EAGER)
@@ -34,13 +37,13 @@ class UserModel(
         @CreatedDate
         var registrationDate: Date? = null,
 
-        @ManyToMany(cascade = [CascadeType.PERSIST,CascadeType.REMOVE], fetch = FetchType.EAGER, mappedBy = "users")
+        @ManyToMany(cascade = [CascadeType.PERSIST, CascadeType.REMOVE], fetch = FetchType.EAGER, mappedBy = "users")
         val books: MutableList<BookModel>? = null,
         var address: String? = null,
         var phone: String? = null,
         var email: String? = null,
 
-        @ManyToMany(fetch = FetchType.EAGER)
+        @ManyToMany(cascade = [CascadeType.PERSIST, CascadeType.REMOVE], fetch = FetchType.EAGER)
         val roles: MutableSet<RoleModel>? = null,
         private val username: String? = null,
         private val password: String? = null
@@ -58,6 +61,7 @@ class UserModel(
                         address = user.address,
                         phone = user.phone,
                         email = user.email,
+                        books = user.books,
                         roles = roles,
                         username = user.username,
                         password = password

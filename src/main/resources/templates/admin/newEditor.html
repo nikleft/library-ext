@@ -17,54 +17,56 @@
 <body>
 <div th:insert="~{header :: user}"></div>
 
-<div class="container" style="padding-bottom:3em" >
-    <h1>Book update</h1>
-    <form th:action="@{'/admin/books/update/' + ${book.id}}" th:object="${book}" method="post">
+<div class="container" style="padding-bottom:3em">
+    <h1>Editor create</h1>
+    <form th:action="@{'/admin/editors/create/'}" th:object="${user}" method="post">
 
         <div class="row">
             <div class="form-group">
-                <h3>Title</h3>
-                <input required type="text" class="form-control" id="inputTitle" th:value="${book.name}" th:field="*{name}">
+                <h3>Username</h3>
+                <input required type="text" class="form-control" id="inputUsername" th:value="${user.username}" th:field="*{username}">
             </div>
         </div>
 
         <div class="row">
             <div class="form-group">
-                <h3>Author</h3>
-                <input required type="text" class="form-control" id="inputAuthor" th:value="${book.author}" th:field="*{author}">
+                <h3>Password</h3>
+                <input required type="password" class="form-control" id="inputPassword" th:value="${user.password}" th:field="*{password}">
             </div>
         </div>
 
         <div class="row">
             <div class="form-group">
-                <h3>Year</h3>
-                <input required type="text" class="form-control" id="inputYear" th:value="${book.year}" th:field="*{year}">
+                <h3>Name</h3>
+                <input required type="text" class="form-control" id="inputName" th:value="${user.name}" th:field="*{name}">
             </div>
         </div>
 
         <div class="row">
             <div class="form-group">
-                <h3>Edition</h3>
-                <input required type="text" class="form-control" id="inputEdition" th:value="${book.edition}" th:field="*{edition}">
+                <h3>Last Name</h3>
+                <input required type="text" class="form-control" id="inputLastName" th:value="${user.surname}" th:field="*{surname}">
             </div>
         </div>
 
         <div class="row">
             <div class="form-group">
-                <h3>Description</h3>
-                <input required type="text" class="form-control" id="inputDescription" th:value="${book.description}" th:field="*{description}">
+                <h3>Email address</h3>
+                <input required type="email" class="form-control" id="exampleInputEmail1" th:value="${user.email}" th:field="*{email}">
             </div>
         </div>
 
         <div class="row">
             <div class="form-group">
-                <h3>Genre</h3>
-                <select th:field="*{genre}">
-                    <option th:each="genre : ${T(com.kstuca.shumovych.master.library.enums.GenreEnum).values()}"
-                            th:value="${genre}"
-                            th:text="${genre.type}">
-                    </option>
-                </select>
+                <h3>Address</h3>
+                <input required type="text" class="form-control" id="exampleInputAddress1" th:value="${user.address}" th:field="*{address}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <h3>Phone</h3>
+                <input required type="text" class="form-control" id="exampleInputPhone1" th:value="${user.phone}" th:field="*{phone}">
             </div>
         </div>
 

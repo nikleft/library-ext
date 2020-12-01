@@ -1,27 +1,27 @@
-insert into books (name, author, year, edition, count, description, genre) values ('Moby Dick', 'Melville', to_date('01-01-18', 'DD-MM-RR'), 'Breeze',10
+insert into books (name, author, year, edition,  description, genre) values ('Moby Dick', 'Melville', to_date('01-01-18', 'DD-MM-RR'), 'Breeze'
 ,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'FORMAL');
-insert into books (name, author, year, edition, count, genre) values ('Get Rich Really Fast', 'Ima', to_date('01-01-18', 'DD-MM-RR'), 'Breeze', 11, 'DETECTIVE');
-insert into books (name, author, year, edition, count, genre) values ('Finding Inner Peace', 'Blissford', to_date('01-01-18', 'DD-MM-RR'), 'Rossman-Press', 16, 'THRILLER');
-insert into books (name, author, year, edition, count, genre) values ('Great Mystery Stories', 'Whodunit', to_date('01-01-18', 'DD-MM-RR'), 'Edicions Bromera', 190, 'DOCUMENTARY');
-insert into books (name, author, year, edition, count, genre) values ('Software Wizardry', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott', 15, 'HOBBY');
+insert into books (name, author, year, edition,  genre) values ('Get Rich Really Fast', 'Ima', to_date('01-01-18', 'DD-MM-RR'), 'Breeze', 'DETECTIVE');
+insert into books (name, author, year, edition,  genre) values ('Finding Inner Peace', 'Blissford', to_date('01-01-18', 'DD-MM-RR'), 'Rossman-Press', 'THRILLER');
+insert into books (name, author, year, edition,  genre) values ('Great Mystery Stories', 'Whodunit', to_date('01-01-18', 'DD-MM-RR'), 'Edicions Bromera', 'DOCUMENTARY');
+insert into books (name, author, year, edition,  genre) values ('Software Wizardry', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
 
-INSERT INTO roles(id, name) VALUES (1, 'ROLE_USER'), (2, 'ROLE_ADMIN');
+INSERT INTO roles(id, name) VALUES (1, 'ROLE_USER'), (2, 'ROLE_ADMIN'), (3, 'ROLE_EDITOR');
 
-insert into books (name, author, year, edition, count, genre) values ('Book 1', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott', 15, 'HOBBY');
-insert into books (name, author, year, edition, count, genre) values ('Book 2', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott', 15, 'HOBBY');
-insert into books (name, author, year, edition, count, genre) values ('Book 3', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott', 15, 'HOBBY');
-insert into books (name, author, year, edition, count, genre) values ('Book 4', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott', 15, 'HOBBY');
-insert into books (name, author, year, edition, count, genre) values ('Book 5', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott', 15, 'HOBBY');
-insert into books (name, author, year, edition, count, genre) values ('Book 6', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott', 15, 'HOBBY');
-insert into books (name, author, year, edition, count, genre) values ('Book 7', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott', 15, 'HOBBY');
-insert into books (name, author, year, edition, count, genre) values ('Book 8', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott', 15, 'HOBBY');
-insert into books (name, author, year, edition, count, genre) values ('Book 9', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott', 15, 'HOBBY');
-insert into books (name, author, year, edition, count, genre) values ('Book 10', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott', 15, 'HOBBY');
-insert into books (name, author, year, edition, count, genre) values ('Book 11', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott', 15, 'HOBBY');
-insert into books (name, author, year, edition, count, genre) values ('Book Super Special', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott', 15, 'HOBBY');
+insert into books (name, author, year, edition, genre) values ('Book 1', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
+insert into books (name, author, year, edition,  genre) values ('Book 2', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
+insert into books (name, author, year, edition,  genre) values ('Book 3', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
+insert into books (name, author, year, edition,  genre) values ('Book 4', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
+insert into books (name, author, year, edition,  genre) values ('Book 5', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
+insert into books (name, author, year, edition,  genre) values ('Book 6', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
+insert into books (name, author, year, edition,  genre) values ('Book 7', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
+insert into books (name, author, year, edition,  genre) values ('Book 8', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
+insert into books (name, author, year, edition,  genre) values ('Book 9', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
+insert into books (name, author, year, edition,  genre) values ('Book 10', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
+insert into books (name, author, year, edition,  genre) values ('Book 11', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
+insert into books (name, author, year, edition,  genre) values ('Book Super Special', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
 
 insert into users (name, surname, username, password, email, registration_date, address, phone)
     values ('Иван', 'Иванов', 'ivanov', '$2b$10$F72hCMCBXekhI7Q6T7LTlutF7r9QFemkgdHnVmGWw695lt3FA7Nh2', 'email@gmail.com', to_date('01-01-20', 'DD-MM-RR'), 'Piccadilly London W1J 7ВХ', '+44 7911 123456'),

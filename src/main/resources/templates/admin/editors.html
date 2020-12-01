@@ -18,21 +18,21 @@
 <div th:insert="~{header :: user}"></div>
 
 <div class="container" style="padding-bottom:3em;width:50%">
-    <h1>Users</h1>
-
+    <h1>Editors</h1>
+    <a th:href="@{'/admin/editors/create'}">Create editor</a>
     <th:block th:each="user : ${users}">
         <div class="row">
             <div class="col-md-4">
-                <h5>User id: <span th:text="${user.id}"></span></h5>
+                <h5>Editor id: <span th:text="${user.id}"></span></h5>
             </div>
             <div class="col-md-4">
                 <h5>Username: <span th:text="${user.username}"></span></h5>
             </div>
             <div class="col-md-4">
-                <a th:href="@{'/admin/users/update/' + ${user.id}}">Update user</a>
-<!--                <form id="login-form" class="form" method="POST" th:action="@{'/admin/users/delete/' + ${user.id}}">-->
-<!--                    <button type="submit">Remove user</button>-->
-<!--                </form>-->
+                <a th:href="@{'/admin/editors/update/' + ${user.id}}">Update editor</a>
+                <form id="login-form" class="form pull-right" method="POST" th:action="@{'/admin/editors/delete/' + ${user.id}}">
+                    <button type="submit">Remove editor</button>
+                </form>
             </div>
         </div>
     </th:block>
