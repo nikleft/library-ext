@@ -66,6 +66,7 @@ class UserService(val userRepository: UserRepository,
             reviews = oldUser.reviews,
             friends = oldUser.friends,
             registrationDate = oldUser.registrationDate,
+            recommendationType = newUser.recommendationType ?: oldUser.recommendationType,
             roles = oldUser.roles
     )
 

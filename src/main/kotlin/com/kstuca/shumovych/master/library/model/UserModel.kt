@@ -1,9 +1,7 @@
 package com.kstuca.shumovych.master.library.model
 
 import com.kstuca.shumovych.master.library.enums.GenreEnum
-import org.hibernate.engine.spi.CascadeStyles.LOCK
-import org.hibernate.engine.spi.CascadingActions.LOCK
-import org.hibernate.event.spi.EventType.LOCK
+import com.kstuca.shumovych.master.library.enums.RecommendationEnum
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import org.springframework.security.core.GrantedAuthority
@@ -46,7 +44,10 @@ class UserModel(
         @ManyToMany(cascade = [CascadeType.PERSIST, CascadeType.REMOVE], fetch = FetchType.EAGER)
         val roles: MutableSet<RoleModel>? = null,
         private val username: String? = null,
-        private val password: String? = null
+        private val password: String? = null,
+
+        @Enumerated(EnumType.STRING)
+        var recommendationType: RecommendationEnum? = RecommendationEnum.DEFAULT
 
 
 ) : UserDetails, Serializable {
@@ -64,6 +65,7 @@ class UserModel(
                         books = user.books,
                         roles = roles,
                         username = user.username,
+                        recommendationType = user.recommendationType,
                         password = password
                 )
     }

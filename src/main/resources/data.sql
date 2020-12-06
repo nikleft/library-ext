@@ -1,33 +1,69 @@
-insert into books (name, author, year, edition,  description, genre) values ('Moby Dick', 'Melville', to_date('01-01-18', 'DD-MM-RR'), 'Breeze'
+insert into books (name, author, year, edition,  description, genre) values ('Moby Dick', 'Melville', to_date('01-01-19', 'DD-MM-RR'), 'Breeze'
 ,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'FORMAL');
-insert into books (name, author, year, edition,  genre) values ('Get Rich Really Fast', 'Ima', to_date('01-01-18', 'DD-MM-RR'), 'Breeze', 'DETECTIVE');
-insert into books (name, author, year, edition,  genre) values ('Finding Inner Peace', 'Blissford', to_date('01-01-18', 'DD-MM-RR'), 'Rossman-Press', 'THRILLER');
-insert into books (name, author, year, edition,  genre) values ('Great Mystery Stories', 'Whodunit', to_date('01-01-18', 'DD-MM-RR'), 'Edicions Bromera', 'DOCUMENTARY');
-insert into books (name, author, year, edition,  genre) values ('Software Wizardry', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
+insert into books (name, author, year, edition,  genre) values ('Get Rich Really Fast', 'Ima', to_date('01-01-20', 'DD-MM-RR'), 'Breeze', 'DETECTIVE');
+insert into books (name, author, year, edition,  genre) values ('Finding Inner Peace', 'Blissford', to_date('01-01-15', 'DD-MM-RR'), 'Rossman-Press', 'THRILLER');
+insert into books (name, author, year, edition,  genre) values ('Great Mystery Stories', 'Whodunit', to_date('01-01-15', 'DD-MM-RR'), 'Edicions Bromera', 'DOCUMENTARY');
+insert into books (name, author, year, edition,  genre) values ('Software Wizardry', 'Abugov', to_date('01-01-15', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
 
 INSERT INTO roles(id, name) VALUES (1, 'ROLE_USER'), (2, 'ROLE_ADMIN'), (3, 'ROLE_EDITOR');
 
-insert into books (name, author, year, edition, genre) values ('Book 1', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
-insert into books (name, author, year, edition,  genre) values ('Book 2', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
-insert into books (name, author, year, edition,  genre) values ('Book 3', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
-insert into books (name, author, year, edition,  genre) values ('Book 4', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
-insert into books (name, author, year, edition,  genre) values ('Book 5', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
-insert into books (name, author, year, edition,  genre) values ('Book 6', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
-insert into books (name, author, year, edition,  genre) values ('Book 7', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
-insert into books (name, author, year, edition,  genre) values ('Book 8', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
-insert into books (name, author, year, edition,  genre) values ('Book 9', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
-insert into books (name, author, year, edition,  genre) values ('Book 10', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
-insert into books (name, author, year, edition,  genre) values ('Book 11', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
-insert into books (name, author, year, edition,  genre) values ('Book Super Special', 'Abugov', to_date('01-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY');
+insert into books (name, author, year, edition, genre, description) values ('The Meaning of Mariah Carey', 'Elizabeth Holmes', to_date('01-01-14', 'DD-MM-RR'), 'J.B. Lippincott',  'DETECTIVE','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
+insert into books (name, author, year, edition,  genre, description) values ('No One Asked for This: Essays', 'Cazzie David', to_date('01-01-13', 'DD-MM-RR'), 'J.B. Lippincott',  'THRILLER','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
+insert into books (name, author, year, edition,  genre, description) values ('Journey', 'Josh Clark, Chuck Bryant', to_date('01-01-12', 'DD-MM-RR'), 'J.B. Lippincott',  'DOCUMENTARY','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
+insert into books (name, author, year, edition,  genre, description) values ('Letters From Father Christmas, Centenary Edition', 'J.R.R. Tolkien, Baillie Tolkien', to_date('10-05-10', 'DD-MM-RR'), 'J.B. Lippincott',  'THRILLER','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
+insert into books (name, author, year, edition,  genre, description) values ('Ready Player Two: A Novel', 'Heather Morris', to_date('12-12-20', 'DD-MM-RR'), 'J.B. Lippincott',  'THRILLER','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
+insert into books (name, author, year, edition,  genre, description) values ('Armada: A Novel', 'Ernest Cline', to_date('11-01-18', 'DD-MM-RR'), 'J.B. Lippincott',  'DOCUMENTARY','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
+insert into books (name, author, year, edition,  genre, description) values ('Blacktop Wasteland: A Novel', 'Whodunit', to_date('01-08-18', 'DD-MM-RR'), 'J.B. Lippincott',  'DOCUMENTARY','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
+insert into books (name, author, year, edition,  genre, description) values ('Migrations', 'Whodunit', to_date('01-01-20', 'DD-MM-RR'), 'J.B. Lippincott',  'DOCUMENTARY','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
+insert into books (name, author, year, edition,  genre, description) values ('Fifthy Words for Rain', 'Abugov', to_date('01-01-20', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
+insert into books (name, author, year, edition,  genre, description) values ('The Vanishing Half: A Novel', 'Abugov', to_date('01-01-20', 'DD-MM-RR'), 'J.B. Lippincott',  'DETECTIVE','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
+insert into books (name, author, year, edition,  genre, description) values ('Story of my life', 'Abugov', to_date('01-01-19', 'DD-MM-RR'), 'J.B. Lippincott',  'HOBBY','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
+insert into books (name, author, year, edition,  genre, description) values ('Mardi: And a Voyage Thither', 'Melville', to_date('01-01-19', 'DD-MM-RR'), 'J.B. Lippincott',  'DETECTIVE','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
 
-insert into users (name, surname, username, password, email, registration_date, address, phone)
-    values ('Иван', 'Иванов', 'ivanov', '$2b$10$F72hCMCBXekhI7Q6T7LTlutF7r9QFemkgdHnVmGWw695lt3FA7Nh2', 'email@gmail.com', to_date('01-01-20', 'DD-MM-RR'), 'Piccadilly London W1J 7ВХ', '+44 7911 123456'),
-           ('Петр', 'Петров', 'petrov', '$2b$10$F72hCMCBXekhI7Q6T7LTlutF7r9QFemkgdHnVmGWw695lt3FA7Nh2', 'email@gmail.com', to_date('01-01-20', 'DD-MM-RR'), 'Piccadilly London W1J 7ВХ', '+44 7911 123456'),
-           ('Сид', 'Сидоров', 'sidorov', '$2b$10$F72hCMCBXekhI7Q6T7LTlutF7r9QFemkgdHnVmGWw695lt3FA7Nh2', 'email@gmail.com', to_date('01-01-20', 'DD-MM-RR'), 'Piccadilly London W1J 7ВХ', '+44 7911 123456'),
-           ('Админ', 'Админ', 'admin', '$2b$10$F72hCMCBXekhI7Q6T7LTlutF7r9QFemkgdHnVmGWw695lt3FA7Nh2', 'email@gmail.com', to_date('01-01-20', 'DD-MM-RR'), 'Piccadilly London W1J 7ВХ', '+44 7911 123456');
+insert into users (name, surname, username, password, email, registration_date, address, phone, recommendation_type)
+    values ('Иван', 'Иванов', 'ivanov', '$2b$10$F72hCMCBXekhI7Q6T7LTlutF7r9QFemkgdHnVmGWw695lt3FA7Nh2', 'email@gmail.com', to_date('01-01-20', 'DD-MM-RR'), 'Piccadilly London W1J 7ВХ', '+44 7911 123456', 'DEFAULT'),
+           ('Петр', 'Петров', 'petrov', '$2b$10$F72hCMCBXekhI7Q6T7LTlutF7r9QFemkgdHnVmGWw695lt3FA7Nh2', 'email@gmail.com', to_date('01-01-20', 'DD-MM-RR'), 'Piccadilly London W1J 7ВХ', '+44 7911 123456', 'DEFAULT'),
+           ('Сид', 'Сидоров', 'sidorov', '$2b$10$F72hCMCBXekhI7Q6T7LTlutF7r9QFemkgdHnVmGWw695lt3FA7Nh2', 'email@gmail.com', to_date('01-01-20', 'DD-MM-RR'), 'Piccadilly London W1J 7ВХ', '+44 7911 123456', 'DEFAULT'),
+           ('Админ', 'Админ', 'admin', '$2b$10$F72hCMCBXekhI7Q6T7LTlutF7r9QFemkgdHnVmGWw695lt3FA7Nh2', 'email@gmail.com', to_date('01-01-20', 'DD-MM-RR'), 'Piccadilly London W1J 7ВХ', '+44 7911 123456', 'DEFAULT');
 
 
 insert into books_users (users_id, books_id)

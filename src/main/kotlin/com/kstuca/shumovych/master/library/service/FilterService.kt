@@ -4,6 +4,8 @@ import com.kstuca.shumovych.master.library.enums.GenreEnum
 import com.kstuca.shumovych.master.library.model.BookModel
 import org.springframework.stereotype.Service
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.ZoneId
 import java.util.*
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
@@ -47,7 +49,7 @@ class FilterService(@PersistenceContext val entityManager: EntityManager) {
 
         fun addFrom(from: String?): BookCriteriaBuilder {
             if (from != null) {
-                val predicate = builder.greaterThanOrEqualTo(root.get<Date>("year"), SimpleDateFormat("yyyy").parse(from))
+                val predicate = builder.greaterThanOrEqualTo(root.get<LocalDate>("year"), LocalDate.from(SimpleDateFormat("yyyy").parse(from).toInstant().atZone(ZoneId.systemDefault())))
                 predicates.add(predicate)
             }
             return this
@@ -55,7 +57,7 @@ class FilterService(@PersistenceContext val entityManager: EntityManager) {
 
         fun addTo(to: String?): BookCriteriaBuilder {
             if (to != null) {
-                val predicate = builder.lessThanOrEqualTo(root.get<Date>("year"), SimpleDateFormat("yyyy").parse(to))
+                val predicate = builder.lessThanOrEqualTo(root.get<LocalDate>("year"),  LocalDate.from(SimpleDateFormat("yyyy").parse(to).toInstant().atZone(ZoneId.systemDefault())))
                 predicates.add(predicate)
             }
             return this
@@ -64,10 +66,10 @@ class FilterService(@PersistenceContext val entityManager: EntityManager) {
         fun addSort(sort: String?): BookCriteriaBuilder {
             if (sort != null) {
                 when (sort) {
-                    "name" -> query.orderBy(builder.desc(root.get<String>("name")))
-                    "edition" -> query.orderBy(builder.desc(root.get<String>("edition")))
-                    "author" -> query.orderBy(builder.desc(root.get<String>("author")))
-                    "date" -> query.orderBy(builder.desc(root.get<Date>("date")))
+                    "name" -> query.orderBy(builder.asc(root.get<String>("name")))
+                    "edition" -> query.orderBy(builder.asc(root.get<String>("edition")))
+                    "author" -> query.orderBy(builder.asc(root.get<String>("author")))
+                    "date" -> query.orderBy(builder.asc(root.get<LocalDate>("date")))
                 }
             }
             return this
