@@ -45,6 +45,7 @@ class UserModel(
         val roles: MutableSet<RoleModel>? = null,
         private val username: String? = null,
         private val password: String? = null,
+        var image: String? = null,
 
         @Enumerated(EnumType.STRING)
         var recommendationType: RecommendationEnum? = RecommendationEnum.DEFAULT

@@ -59,11 +59,10 @@
         <div class="row">
             <div class="form-group">
                 <h3>Genre</h3>
-                <select>
+                <select th:field="*{genre}">
                     <option th:each="genre : ${T(com.kstuca.shumovych.master.library.enums.GenreEnum).values()}"
                             th:value="${genre}"
-                            th:text="${genre}"
-                            th:field="*{genre}">
+                            th:text="${genre.type}">
                     </option>
                 </select>
             </div>

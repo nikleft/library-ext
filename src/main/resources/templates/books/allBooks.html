@@ -85,7 +85,12 @@
                     <th:block th:each="book : ${books}">
                         <div style="padding-top:2em;padding-bottom:2em" class="row">
                             <a th:href="@{'/books/' + ${book.id}}">
-                                <img style="float:left;margin-right:2em;" src="/images/book-lister.png"/>
+                                <th:block th:if="${book.listerImage == null}">
+                                    <img style="float:left;margin-right:2em;" src="/images/notfoundlister.png"/>
+                                </th:block>
+                                <th:block th:if="${book.listerImage != null}">
+                                    <img style="float:left;margin-right:2em;" th:src="@{'/images/' + ${book.listerImage}}"/>
+                                </th:block>
                             </a>
                             <a th:href="@{'/books/' + ${book.id}}">
                                 <h2 th:text="${book.name}"></h2>

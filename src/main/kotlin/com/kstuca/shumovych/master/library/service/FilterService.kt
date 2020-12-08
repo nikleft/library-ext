@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
-import java.util.*
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
 import javax.persistence.criteria.CriteriaBuilder
@@ -30,7 +29,7 @@ class FilterService(@PersistenceContext val entityManager: EntityManager) {
                 .addFrom(from)
                 .addTo(to)
                 .build()
-        return executeAndWrap(page, getTotalPages(builder), criteria)
+        return executeAndWrap(page, criteria)
     }
 
     class BookCriteriaBuilder(val builder: CriteriaBuilder,
@@ -57,7 +56,7 @@ class FilterService(@PersistenceContext val entityManager: EntityManager) {
 
         fun addTo(to: String?): BookCriteriaBuilder {
             if (to != null) {
-                val predicate = builder.lessThanOrEqualTo(root.get<LocalDate>("year"),  LocalDate.from(SimpleDateFormat("yyyy").parse(to).toInstant().atZone(ZoneId.systemDefault())))
+                val predicate = builder.lessThanOrEqualTo(root.get<LocalDate>("year"), LocalDate.from(SimpleDateFormat("yyyy").parse(to).toInstant().atZone(ZoneId.systemDefault())))
                 predicates.add(predicate)
             }
             return this
@@ -78,18 +77,18 @@ class FilterService(@PersistenceContext val entityManager: EntityManager) {
         fun build(): CriteriaQuery<BookModel> = query.where(*predicates.toTypedArray())
     }
 
-    private fun executeAndWrap(currentPage: Int?, totalPages: Long, criteria: CriteriaQuery<BookModel>): CustomPage<BookModel> {
+    private fun executeAndWrap(currentPage: Int?, criteria: CriteriaQuery<BookModel>): CustomPage<BookModel> {
         if (currentPage != null) {
-            return CustomPage(totalPages, entityManager.createQuery(criteria).setFirstResult((currentPage.toInt() - 1) * 2).setMaxResults(DEFAULT_SIZE).resultList)
+            val result = entityManager.createQuery(criteria).setFirstResult((currentPage.toInt() - 1) * 2).setMaxResults(DEFAULT_SIZE).resultList
+            return CustomPage(getTotalPages(entityManager.createQuery(criteria).setFirstResult(0).resultList.size), result)
         }
-        return CustomPage(totalPages, entityManager.createQuery(criteria).setFirstResult(0).setMaxResults(DEFAULT_SIZE).resultList)
+        val result = entityManager.createQuery(criteria).setFirstResult(0).setMaxResults(DEFAULT_SIZE).resultList
+        return CustomPage(getTotalPages(entityManager.createQuery(criteria).setFirstResult(0).resultList.size), result)
     }
 
-    private fun getTotalPages(builder: CriteriaBuilder): Long {
-        val countQuery: CriteriaQuery<Long> = builder.createQuery(Long::class.java)
-        countQuery.select(builder.count(countQuery.from(BookModel::class.java)))
-        val result = entityManager.createQuery(countQuery).singleResult / DEFAULT_SIZE
-        if (entityManager.createQuery(countQuery).singleResult % DEFAULT_SIZE != 0L)
+    private fun getTotalPages(totalPages: Int): Long {
+        val result = totalPages.toLong() / DEFAULT_SIZE
+        if (totalPages.toLong() % DEFAULT_SIZE != 0L)
             return result + 1
         return result
     }

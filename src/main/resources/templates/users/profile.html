@@ -22,8 +22,20 @@
     <div class="col-md-12">
         <div class="col-md-4">
             <div class="portlet light profile-sidebar-portlet bordered">
-                <div class="profile-userpic">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="img-responsive" alt=""></div>
+
+
+                <th:block th:if="${user.image == null}">
+                    <div class="profile-userpic">
+                        <img class="img-responsive" alt="" src="/images/user.png"/>
+                    </div>
+                </th:block>
+                <th:block th:if="${user.image != null}">
+                    <div class="profile-userpic">
+                        <img class="img-responsive" alt=""
+                             th:src="@{'/images/users/' + ${#authentication.principal.image}}"/>
+                    </div>
+                </th:block>
+
                 <div class="profile-usertitle">
                     <div style="padding-bottom:1em" class="profile-usertitle-name"
                          th:text="@{${user.name} + ' ' + ${user.surname}}"></div>
@@ -70,17 +82,19 @@
                                                                       data-toggle="tab">Profile</a></li>
                             <li role="presentation"><a href="#mybooks" aria-controls="mybooks" role="tab"
                                                        data-toggle="tab">Book shelf</a></li>
+
                             <li role="presentation"><a href="#myreviews" aria-controls="myreviews" role="tab"
                                                        data-toggle="tab">Reviews</a></li>
                             <li role="presentation"><a href="#friends" aria-controls="friends" role="tab"
                                                        data-toggle="tab">Friends</a></li>
+
                             <th:block th:if="${#authentication.getPrincipal().getUsername() == user.username}">
                                 <li role="presentation"><a href="#home" aria-controls="home" role="tab"
                                                            data-toggle="tab">Update profile</a></li>
                             </th:block>
                         </ul>
 
-                        <!-- Tab panes -->
+
                         <div style="padding-top:1em" class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="profile">
                                 <div class="row">
@@ -93,6 +107,7 @@
                                 </div>
                             </div>
 
+
                             <div role="tabpanel" class="tab-pane" id="mybooks">
                                 <th:block th:each="orderbook : ${user.books}">
                                     <a th:href="@{'/books/' + ${orderbook.id}}">
@@ -101,11 +116,13 @@
                                                  src="/images/book-open.png"/>
                                             <h2 class="black">Book name: <span th:text="${orderbook.name}"></span>
                                             </h2>
-                                            <h3 class="black">Author: <span th:text="${orderbook.author}"></span></h3>
+                                            <h3 class="black">Author: <span th:text="${orderbook.author}"></span>
+                                            </h3>
                                         </div>
                                     </a>
                                 </th:block>
                             </div>
+
 
                             <div role="tabpanel" class="tab-pane" id="myreviews">
                                 <th:block th:each="review : ${user.reviews}">
@@ -121,6 +138,7 @@
                                 </th:block>
                             </div>
 
+
                             <div role="tabpanel" class="tab-pane" id="friends">
                                 <th:block th:each="friend : ${user.friends}">
                                     <a th:href="@{'/profiles/' + ${friend.id}}">
@@ -134,7 +152,8 @@
                                 </th:block>
                             </div>
 
-                            <th:block th:if="${#authentication.getPrincipal().getUsername() == user.username}">
+
+                            <th:block th:if="${#authentication.principal.username == user.username}">
                                 <div role="tabpanel" class="tab-pane" id="home">
                                     <form th:action="@{'/profiles/' + ${#authentication.principal.id}}"
                                           th:object="${changeProfileForm}" method="post">
@@ -183,8 +202,16 @@
                                                 </option>
                                             </select>
                                         </div>
+                                        <div>
+                                            <button type="submit" class="btn btn-default">Submit</button>
+                                        </div>
+                                    </form>
 
-                                        <button type="submit" class="btn btn-default">Submit</button>
+                                    <form th:action="@{'/profiles/image/' + ${#authentication.principal.id}}"
+                                          method="POST" enctype="multipart/form-data">
+                                        <h3 style="color:black">Profile image:</h3>
+                                        <input type="file" name="file"/>
+                                        <input type="submit" value="Upload"/>
                                     </form>
                                 </div>
                             </th:block>

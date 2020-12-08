@@ -1,7 +1,6 @@
 package com.kstuca.shumovych.master.library.controller
 
 import com.kstuca.shumovych.master.library.model.BookModel
-import com.kstuca.shumovych.master.library.model.RoleModel
 import com.kstuca.shumovych.master.library.model.UserModel
 import com.kstuca.shumovych.master.library.service.BookService
 import com.kstuca.shumovych.master.library.service.RoleService
@@ -9,6 +8,12 @@ import com.kstuca.shumovych.master.library.service.UserService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
+import java.io.File
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+import java.util.*
 import javax.validation.Valid
 
 
@@ -118,7 +123,7 @@ class AdminController(val userService: UserService,
 
     @PostMapping("/books/create")
     fun createBook(@ModelAttribute("changeBookForm") @Valid changeBookForm: BookModel,
-                          model: Model): String {
+                   model: Model): String {
         bookService.saveBook(changeBookForm)
         model.addAttribute("books", bookService.getAllBooks())
         return "redirect:/admin/books"
@@ -128,6 +133,42 @@ class AdminController(val userService: UserService,
     fun deleteBook(@PathVariable("id") id: Long, model: Model): String {
         bookService.deleteBook(id)
         model.addAttribute("books", bookService.getAllBooks())
+        return "redirect:/admin/books"
+    }
+
+    @PostMapping("/books/fullImage/{id}")
+    fun createFullImage(@RequestParam("file") image: MultipartFile, @PathVariable("id") bookId: Long): String? {
+        val file = File(File("./").absolutePath + "/build/resources/main/static/images/")
+        val filename = UUID.randomUUID().toString() + ".jpg"
+        val saveTo: Path = Paths.get(file.absolutePath + "/" + filename)
+        try {
+            Files.copy(image.inputStream, saveTo)
+
+            val book = bookService.getBook(bookId)
+            book.fullImage = filename
+            bookService.saveBook(book)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            "Error : " + e.message
+        }
+        return "redirect:/admin/books"
+    }
+
+    @PostMapping("/books/listerImage/{id}")
+    fun createListerImage(@RequestParam("file") image: MultipartFile, @PathVariable("id") bookId: Long): String? {
+        val file = File(File("./").absolutePath + "/build/resources/main/static/images/")
+        val filename = UUID.randomUUID().toString() + ".jpg"
+        val saveTo: Path = Paths.get(file.absolutePath + "/" + filename)
+        try {
+            Files.copy(image.inputStream, saveTo)
+
+            val book = bookService.getBook(bookId)
+            book.listerImage = filename
+            bookService.saveBook(book)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            "Error : " + e.message
+        }
         return "redirect:/admin/books"
     }
 }

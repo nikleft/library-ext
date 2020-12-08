@@ -61,17 +61,18 @@ class UserService(val userRepository: UserRepository,
             surname = newUser.surname ?: oldUser.surname,
 
             username = newUser.username ?: oldUser.username,
-            password = if(newUser.password != null) bCryptPasswordEncoder.encode(newUser.password) else oldUser.password,
+            password = if (newUser.password != null) bCryptPasswordEncoder.encode(newUser.password) else oldUser.password,
             books = oldUser.books,
             reviews = oldUser.reviews,
-            friends = oldUser.friends,
+            friends = newUser.friends ?: oldUser.friends,
             registrationDate = oldUser.registrationDate,
             recommendationType = newUser.recommendationType ?: oldUser.recommendationType,
+            image = newUser.image ?: oldUser.image,
             roles = oldUser.roles
     )
 
     fun updateUser(oldUser: UserModel, newUser: UserModel): UserModel {
-       return userRepository.save(changeUser(oldUser, newUser))
+        return userRepository.save(changeUser(oldUser, newUser))
     }
 
     fun deleteUser(userId: Long): Boolean {

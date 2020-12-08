@@ -28,7 +28,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
         val resources = arrayOf(
                 "/", "/home", "/pictureCheckCode", "/include/**",
-                "/css/**", "/icons/**", "/images/**", "/js/**", "/layer/**")
+                "/css/**", "/icons/**", "/images/**", "/js/**", "/layer/**", "/images/users/**")
 
         httpSecurity.csrf()
                     .disable()

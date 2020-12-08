@@ -19,8 +19,13 @@
     <div class="container">
         <div class="row">
             <div class="col-6 col-md-4">
-                <img style="float:left;margin-right:2em;padding-bottom:1em" src="/images/book-details.png"/>
-
+                <th:block th:if="${book.fullImage == null}">
+                    <img style="float:left;margin-right:2em;padding-bottom:1em" src="/images/notfound.png"/>
+                </th:block>
+                <th:block th:if="${book.fullImage != null}">
+                    <img style="float:left;margin-right:2em;padding-bottom:1em"
+                         th:src="@{'/images/' + ${book.fullImage}}"/>
+                </th:block>
                 <th:block th:with="selection=${#authentication.principal.books.?[name == '__${book.name}__']}">
                     <th:block th:if="${selection.size() > 0}">
                         <div style="padding-top:1em">
@@ -45,7 +50,6 @@
                 <h3><span th:text="${book.author}"></span></h3>
                 <h3>Publish date: <span th:text="${book.year}"></span></h3>
                 <h3>Edition: <span th:text="${book.edition}"></span></h3>
-                <h3><span th:text="${book.image}"></span></h3>
                 <h3 style="margin-top:2em">Description</h3>
                 <p th:text="${book.description}"></p>
             </div>
@@ -71,9 +75,18 @@
 
             <th:block th:each="review : ${book.reviews}">
                 <div style="margin-top:3em" class="row">
-                    <div class="col-6 col-md-4">
-                        <img style="float:left;margin-right:2em;" src="/images/profile-pic-reviews.png"/>
-                    </div>
+
+                    <th:block th:if="${review.reviewer.image == null}">
+                        <div class="col-6 col-md-4">
+                            <img style="float:left;margin-right:2em;" src="/images/user.png"/>
+                        </div>
+                    </th:block>
+                    <th:block th:if="${review.reviewer.image != null}">
+                        <div class="col-6 col-md-4">
+                            <img style="float:left;margin-right:2em;"
+                                 th:src="@{'/images/users/' + ${review.reviewer.image}}"/>
+                        </div>
+                    </th:block>
                     <div class="col-6 col-md-8"
                          th:classappend="${review.rating > 7} ? review-good : (${review.rating > 4} ? review-normal : review-bad)">
                         <h4 class="pull-right">

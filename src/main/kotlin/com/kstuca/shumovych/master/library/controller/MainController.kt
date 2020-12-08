@@ -14,5 +14,4 @@ class MainController(val bookService: BookService) {
         model.addAttribute("recommendations", recommendations)
         return "index"
     }
-
 }

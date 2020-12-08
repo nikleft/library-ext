@@ -106,7 +106,7 @@ class BookService(val bookRepository: BookRepository,
                     val total: Double = if (book.reviews != null && book.reviews.isNotEmpty())
                         book.reviews.sumByDouble { it.rating!! }
                     else 5.0
-                    similarities[index][total] = book
+                    similarities[index][total / 10] = book
                 }
             }
         }
@@ -123,7 +123,7 @@ class BookService(val bookRepository: BookRepository,
                     val total: Double = if (book.reviews != null && book.reviews.isNotEmpty())
                         book.reviews.sumByDouble { it.rating!! }
                     else 5.0
-                    val key = jw.similarity(it.genre?.type, book.genre?.type) + total
+                    val key = jw.similarity(it.genre?.type, book.genre?.type) + total / 10
                     similarities[index][key] = book
                 }
             }
@@ -141,7 +141,7 @@ class BookService(val bookRepository: BookRepository,
                     val total: Double = if (book.reviews != null && book.reviews.isNotEmpty())
                         book.reviews.sumByDouble { it.rating!! }
                     else 5.0
-                    val key = jw.similarity(it.author, book.author) + jw.similarity(it.genre?.type, book.genre?.type) + total
+                    val key = jw.similarity(it.author, book.author) + jw.similarity(it.genre?.type, book.genre?.type) + total / 10
                     similarities[index][key] = book
                 }
             }
@@ -158,10 +158,10 @@ class BookService(val bookRepository: BookRepository,
     }
 
     private fun addNewBookToResult(result: MutableList<BookModel>, bookToAdd: MutableMap<Double, BookModel>, bookModel: BookModel, books: List<BookModel>) {
-        if (books.contains(bookModel) || result.contains(bookModel)){
+        if (books.contains(bookModel) || result.contains(bookModel)) {
             bookToAdd.remove(bookToAdd.keys.max())
             val maxValueBook = bookToAdd[bookToAdd.keys.max()]
-            if (maxValueBook != null){
+            if (maxValueBook != null) {
                 addNewBookToResult(result, bookToAdd, maxValueBook, books)
             }
         } else result.add(bookModel)

@@ -11,7 +11,12 @@
                         <div class="row">
                             <div class="col-6 col-md-4">
                                 <a th:href="@{'/books/' + ${book.id}}">
-                                    <img class="carousel-image" src="/images/book-lister.png"/>
+                                    <th:block th:if="${book.listerImage == null}">
+                                        <img class="carousel-image" src="/images/notfoundlister.png"/>
+                                    </th:block>
+                                    <th:block th:if="${book.listerImage != null}">
+                                        <img class="carousel-image" th:src="@{'/images/' + ${book.listerImage}}"/>
+                                    </th:block>
                                 </a>
                             </div>
                             <div class="col-12 col-md-8">

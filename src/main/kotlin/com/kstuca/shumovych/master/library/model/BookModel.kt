@@ -32,6 +32,6 @@ class BookModel(
 
         @ManyToMany(cascade = [CascadeType.PERSIST, CascadeType.REMOVE], fetch = FetchType.EAGER)
         val users: MutableList<UserModel>? = null,
-        @Lob
-        val image: Array<Byte>? = null
+        var fullImage: String? = null,
+        var listerImage: String? = null
 ): Serializable

@@ -8,6 +8,12 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
+import java.io.File
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+import java.util.*
 import javax.validation.Valid
 
 @Controller
@@ -46,9 +52,11 @@ class ProfileController(val userService: UserService,
         val user = userService.findUserById(userService.getCurrentUser().id!!)
         val friend = userService.findUserById(id)
         user.friends?.add(friend)
+        friend.friends?.add(user)
+
         userService.updateCurrentUser(user)
         model.addAttribute("user", friend)
-        return "users/profile"
+        return "redirect:/profiles/$id"
     }
 
     @GetMapping("/removeFriend/{id}")
@@ -56,8 +64,29 @@ class ProfileController(val userService: UserService,
         val user = userService.findUserById(userService.getCurrentUser().id!!)
         val friend = userService.findUserById(id)
         user.friends?.remove(friend)
+        friend.friends?.remove(user)
+
         userService.updateCurrentUser(user)
         model.addAttribute("user", friend)
-        return "users/profile"
+        return "redirect:/profiles/$id"
+    }
+
+    @PostMapping("/image/{id}")
+    fun addUserImage(@RequestParam("file") image: MultipartFile, @PathVariable("id") userId: Long): String? {
+        val file = File(File("./").absolutePath + "/build/resources/main/static/images/users/")
+        val filename = UUID.randomUUID().toString() + ".png"
+        val saveTo: Path = Paths.get(file.absolutePath + "/" + filename)
+        try {
+            Files.copy(image.inputStream, saveTo)
+
+            val authenticated = SecurityContextHolder.getContext().authentication.principal as UserModel
+
+            authenticated.image = filename
+            userService.updateCurrentUser(authenticated)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            "Error : " + e.message
+        }
+        return "redirect:/profiles/$userId"
     }
 }
